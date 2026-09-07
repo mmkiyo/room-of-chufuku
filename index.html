@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中福の部屋</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #eee;
+      font-family: sans-serif;
+    }
+
+    .room {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background-image: url("background/room1.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .chufuku {
+      position: absolute;
+      width: 35%;
+      max-width: 400px;
+      left: 50%;
+      bottom: 5%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="room">
+    <img
+      src="character/normal.png"
+      alt="中福"
+      class="chufuku"
+    >
+  </div>
+
+</body>
+</html>
