@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>中福の部屋</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -27,6 +28,7 @@
       background-position: center;
     }
 
+    /* 中福 */
     .chufuku {
       position: absolute;
       width: 35%;
@@ -34,6 +36,72 @@
       left: 50%;
       bottom: 5%;
       transform: translateX(-50%);
+      transition: transform 0.3s;
+    }
+
+    /* 喜んだとき */
+    .chufuku.happy {
+      animation: happy 0.5s ease-in-out 2;
+    }
+
+    @keyframes happy {
+      0% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(-20px);
+      }
+
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* ポテチ */
+    .potatochips {
+      position: absolute;
+      width: 100px;
+      left: 50%;
+      bottom: 25%;
+      transform: translateX(-50%);
+      display: none;
+    }
+
+    /* セリフ */
+    .message {
+      position: absolute;
+      left: 50%;
+      top: 8%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 15px 25px;
+      border-radius: 20px;
+      font-size: 20px;
+      display: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    /* ボタン */
+    .buttons {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      background: white;
+    }
+
+    button {
+      border: none;
+      border-radius: 30px;
+      padding: 14px 28px;
+      font-size: 18px;
+      cursor: pointer;
+      background: #f5c36b;
+    }
+
+    button:hover {
+      opacity: 0.8;
     }
   </style>
 </head>
@@ -41,12 +109,68 @@
 <body>
 
   <div class="room">
+
+    <!-- 中福 -->
     <img
       src="character/normal.png"
       alt="中福"
       class="chufuku"
+      id="chufuku"
     >
+
+    <!-- ポテチ -->
+    <img
+      src="item/potetocrisps.PNG"
+      alt="ポテチ"
+      class="potatochips"
+      id="potatochips"
+    >
+
+    <!-- セリフ -->
+    <div class="message" id="message">
+      わーい！ポテチだ！
+    </div>
+
   </div>
+
+  <div class="buttons">
+    <button onclick="givePotatoChips()">
+      🍟 ポテチをあげる
+    </button>
+  </div>
+
+
+  <script>
+
+    function givePotatoChips() {
+
+      const chufuku = document.getElementById("chufuku");
+      const potatochips = document.getElementById("potatochips");
+      const message = document.getElementById("message");
+
+      // 中福を喜ぶ姿にする
+      chufuku.src = "character/happy.png";
+      chufuku.classList.add("happy");
+
+      // ポテチを表示
+      potatochips.style.display = "block";
+
+      // セリフを表示
+      message.style.display = "block";
+
+      // 3秒後に元に戻す
+      setTimeout(function() {
+
+        chufuku.src = "character/normal.png";
+        chufuku.classList.remove("happy");
+
+        potatochips.style.display = "none";
+        message.style.display = "none";
+
+      }, 3000);
+    }
+
+  </script>
 
 </body>
 </html>
