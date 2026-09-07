@@ -36,10 +36,9 @@
       left: 50%;
       bottom: 5%;
       transform: translateX(-50%);
-      transition: transform 0.3s;
     }
 
-    /* 喜んだとき */
+    /* ぴょんっと喜ぶ */
     .chufuku.happy {
       animation: happy 0.5s ease-in-out 2;
     }
@@ -58,8 +57,8 @@
       }
     }
 
-    /* ポテチ */
-    .potatochips {
+    /* おやつ */
+    .snack {
       position: absolute;
       width: 100px;
       left: 50%;
@@ -80,9 +79,10 @@
       font-size: 20px;
       display: none;
       box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      white-space: nowrap;
     }
 
-    /* ボタン */
+    /* おやつ選択エリア */
     .buttons {
       max-width: 1200px;
       margin: 0 auto;
@@ -91,13 +91,18 @@
       background: white;
     }
 
+    .buttons p {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
     button {
       border: none;
       border-radius: 30px;
-      padding: 14px 28px;
+      padding: 14px 24px;
+      margin: 5px;
       font-size: 18px;
       cursor: pointer;
-      background: #f5c36b;
     }
 
     button:hover {
@@ -118,56 +123,143 @@
       id="chufuku"
     >
 
-    <!-- ポテチ -->
+    <!-- おやつ -->
     <img
-      src="item/potetocrisps.PNG"
-      alt="ポテチ"
-      class="potatochips"
-      id="potatochips"
+      src=""
+      alt="おやつ"
+      class="snack"
+      id="snack"
     >
 
     <!-- セリフ -->
-    <div class="message" id="message">
-      わーい！ポテチだ！
-    </div>
+    <div class="message" id="message"></div>
 
   </div>
 
   <div class="buttons">
-    <button onclick="givePotatoChips()">
-      🍟 ポテチをあげる
+
+    <p>中福に何かあげる？</p>
+
+    <button onclick="giveSnack('fish')">
+      🐟 魚
     </button>
+
+    <button onclick="giveSnack('potato')">
+      🍟 ポテチ
+    </button>
+
+    <button onclick="giveSnack('apple')">
+      🍎 りんご
+    </button>
+
   </div>
 
 
   <script>
 
-    function givePotatoChips() {
+    let reactionTimer;
+
+    function giveSnack(type) {
 
       const chufuku = document.getElementById("chufuku");
-      const potatochips = document.getElementById("potatochips");
+      const snack = document.getElementById("snack");
       const message = document.getElementById("message");
 
-      // 中福を喜ぶ姿にする
-      chufuku.src = "character/happy.png";
-      chufuku.classList.add("happy");
+      // 前の反応をリセット
+      clearTimeout(reactionTimer);
 
-      // ポテチを表示
-      potatochips.style.display = "block";
+      chufuku.classList.remove("happy");
+      snack.style.display = "none";
+      message.style.display = "none";
 
-      // セリフを表示
-      message.style.display = "block";
 
-      // 3秒後に元に戻す
-      setTimeout(function() {
+      // ==========================
+      // 魚
+      // ==========================
 
-        chufuku.src = "character/normal.png";
-        chufuku.classList.remove("happy");
+      if (type === "fish") {
 
-        potatochips.style.display = "none";
-        message.style.display = "none";
+        snack.src = "item/fish.PNG";
+        snack.style.display = "block";
 
-      }, 3000);
+        chufuku.src = "character/music.png";
+        message.textContent = "わーい!";
+        message.style.display = "block";
+
+        chufuku.classList.add("happy");
+
+
+        reactionTimer = setTimeout(function() {
+
+          chufuku.classList.remove("happy");
+
+          chufuku.src = "character/heart.png";
+          message.textContent = "すごくおいしいー!";
+
+        }, 2000);
+      }
+
+
+      // ==========================
+      // ポテチ
+      // ==========================
+
+      else if (type === "potato") {
+
+        snack.src = "item/potetocrisps.PNG";
+        snack.style.display = "block";
+
+        chufuku.src = "character/music.png";
+        message.textContent = "わーい!!";
+        message.style.display = "block";
+
+        chufuku.classList.add("happy");
+
+
+        reactionTimer = setTimeout(function() {
+
+          chufuku.classList.remove("happy");
+
+          chufuku.src = "character/tsurime.png";
+
+          reactionTimer = setTimeout(function() {
+
+            chufuku.src = "character/tears.png";
+            message.textContent = "おなかわるい";
+
+          }, 1200);
+
+        }, 2000);
+      }
+
+
+      // ==========================
+      // りんご
+      // ==========================
+
+      else if (type === "apple") {
+
+        snack.src = "item/apple.png";
+        snack.style.display = "block";
+
+        chufuku.src = "character/music.png";
+        message.textContent = "わーい!ありがとう!";
+        message.style.display = "block";
+
+        chufuku.classList.add("happy");
+
+
+        reactionTimer = setTimeout(function() {
+
+          chufuku.classList.remove("happy");
+
+          chufuku.src = "character/normal.png";
+
+          snack.style.display = "none";
+
+        }, 3000);
+      }
+
     }
 
   </script>
