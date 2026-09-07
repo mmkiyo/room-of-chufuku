@@ -38,7 +38,7 @@
       transform: translateX(-50%);
     }
 
-    /* ぴょんっと喜ぶ */
+    /* 喜ぶ */
     .chufuku.happy {
       animation: happy 0.5s ease-in-out 2;
     }
@@ -82,7 +82,17 @@
       white-space: nowrap;
     }
 
-    /* おやつ選択エリア */
+    /* 情報表示 */
+    .status {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px;
+      background: white;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    /* ボタン */
     .buttons {
       max-width: 1200px;
       margin: 0 auto;
@@ -113,7 +123,8 @@
 
 <body>
 
-  <div class="room">
+  <!-- 部屋 -->
+  <div class="room" id="room">
 
     <!-- 中福 -->
     <img
@@ -136,9 +147,17 @@
 
   </div>
 
+
+  <!-- ステータス -->
+  <div class="status">
+    ❤️ なかよし度：<span id="friendship">0</span>
+  </div>
+
+
+  <!-- ボタン -->
   <div class="buttons">
 
-    <p>中福に何かあげる？</p>
+    <p>中福に何をあげる？</p>
 
     <button onclick="giveSnack('fish')">
       🐟 魚
@@ -152,12 +171,53 @@
       🍎 りんご
     </button>
 
+    <hr>
+
+    <p>中福とお出かけする</p>
+
+    <button onclick="goSea()">
+      🌊 海に連れていく
+    </button>
+
+    <button onclick="goLand()">
+      🏠 陸に連れていく
+    </button>
+
   </div>
 
 
   <script>
 
+    /* ==========================
+       なかよし度
+    ========================== */
+
+    let friendship = Number(localStorage.getItem("friendship")) || 0;
+
+    document.getElementById("friendship").textContent = friendship;
+
+
+    function addFriendship(amount) {
+
+      friendship += amount;
+
+      // 0～100の範囲にする
+      if (friendship > 100) {
+        friendship = 100;
+      }
+
+      localStorage.setItem("friendship", friendship);
+
+      document.getElementById("friendship").textContent = friendship;
+    }
+
+
+    /* ==========================
+       おやつ
+    ========================== */
+
     let reactionTimer;
+
 
     function giveSnack(type) {
 
@@ -165,17 +225,15 @@
       const snack = document.getElementById("snack");
       const message = document.getElementById("message");
 
-      // 前の反応をリセット
       clearTimeout(reactionTimer);
 
       chufuku.classList.remove("happy");
+
       snack.style.display = "none";
       message.style.display = "none";
 
 
-      // ==========================
-      // 魚
-      // ==========================
+      /* 魚 */
 
       if (type === "fish") {
 
@@ -183,10 +241,13 @@
         snack.style.display = "block";
 
         chufuku.src = "character/music.png";
+
         message.textContent = "わーい!";
         message.style.display = "block";
 
         chufuku.classList.add("happy");
+
+        addFriendship(3);
 
 
         reactionTimer = setTimeout(function() {
@@ -194,15 +255,14 @@
           chufuku.classList.remove("happy");
 
           chufuku.src = "character/heart.png";
+
           message.textContent = "すごくおいしいー!";
 
         }, 2000);
       }
 
 
-      // ==========================
-      // ポテチ
-      // ==========================
+      /* ポテチ */
 
       else if (type === "potato") {
 
@@ -210,10 +270,13 @@
         snack.style.display = "block";
 
         chufuku.src = "character/music.png";
+
         message.textContent = "わーい!!";
         message.style.display = "block";
 
         chufuku.classList.add("happy");
+
+        addFriendship(2);
 
 
         reactionTimer = setTimeout(function() {
@@ -222,9 +285,11 @@
 
           chufuku.src = "character/tsurime.png";
 
+
           reactionTimer = setTimeout(function() {
 
             chufuku.src = "character/tears.png";
+
             message.textContent = "おなかわるい";
 
           }, 1200);
@@ -233,9 +298,7 @@
       }
 
 
-      // ==========================
-      // りんご
-      // ==========================
+      /* りんご */
 
       else if (type === "apple") {
 
@@ -243,10 +306,13 @@
         snack.style.display = "block";
 
         chufuku.src = "character/music.png";
+
         message.textContent = "わーい!ありがとう!";
         message.style.display = "block";
 
         chufuku.classList.add("happy");
+
+        addFriendship(1);
 
 
         reactionTimer = setTimeout(function() {
@@ -260,6 +326,48 @@
         }, 3000);
       }
 
+    }
+
+
+    /* ==========================
+       海へ行く
+    ========================== */
+
+    function goSea() {
+
+      const room = document.getElementById("room");
+
+      room.style.backgroundImage = 'url("background/sea1.jpg")';
+
+      const message = document.getElementById("message");
+
+      message.textContent = "海に来たよ!";
+      message.style.display = "block";
+
+      setTimeout(function() {
+        message.style.display = "none";
+      }, 2000);
+    }
+
+
+    /* ==========================
+       陸へ戻る
+    ========================== */
+
+    function goLand() {
+
+      const room = document.getElementById("room");
+
+      room.style.backgroundImage = 'url("background/room1.jpg")';
+
+      const message = document.getElementById("message");
+
+      message.textContent = "お部屋に帰ってきたよ!";
+      message.style.display = "block";
+
+      setTimeout(function() {
+        message.style.display = "none";
+      }, 2000);
     }
 
   </script>
