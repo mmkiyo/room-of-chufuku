@@ -20,7 +20,7 @@
 
 
     /* ==========================
-       中福のいる画面
+       中福のいるゲーム画面
     ========================== */
 
     .room {
@@ -51,7 +51,7 @@
       max-width: 400px;
 
       left: 50%;
-      bottom: 5%;
+      bottom: 7%;
 
       transform:
         translateX(-50%);
@@ -397,19 +397,24 @@
       position: absolute;
 
       left: 50%;
-      top: 7%;
+      top: 8%;
 
       transform:
         translateX(-50%);
 
-      background: white;
+      max-width: 75%;
+
+      background:
+        rgba(255,255,255,0.94);
 
       padding:
-        15px 25px;
+        11px 22px;
 
-      border-radius: 20px;
+      border-radius: 18px;
 
-      font-size: 20px;
+      font-size: 18px;
+
+      line-height: 1.4;
 
       display: none;
 
@@ -417,11 +422,11 @@
         0 3px 10px
         rgba(0,0,0,0.15);
 
-      white-space: nowrap;
+      white-space: normal;
 
       text-align: center;
 
-      z-index: 10;
+      z-index: 15;
 
     }
 
@@ -547,22 +552,54 @@
 
 
     /* ==========================
+       ゲームUI全体
+    ========================== */
+
+    .game-ui {
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 20;
+
+    }
+
+
+    /* ==========================
        ステータス
     ========================== */
 
     .status {
 
-      max-width: 1200px;
+      position: absolute;
 
-      margin: 0 auto;
+      top: 12px;
+      left: 12px;
 
-      padding: 10px;
+      padding:
+        7px 13px;
 
-      background: white;
+      background:
+        rgba(255,255,255,0.82);
+
+      border-radius: 20px;
 
       text-align: center;
 
-      font-size: 20px;
+      font-size: 14px;
+
+      line-height: 1.4;
+
+      box-shadow:
+        0 2px 8px
+        rgba(0,0,0,0.08);
+
+      pointer-events: auto;
+
+      z-index: 25;
 
     }
 
@@ -577,14 +614,15 @@
 
       border-radius: 20px;
 
-      background: #f2f2f2;
+      background:
+        rgba(242,242,242,0.9);
 
       padding:
-        7px 16px;
+        4px 10px;
 
-      margin-top: 6px;
+      margin-top: 3px;
 
-      font-size: 15px;
+      font-size: 12px;
 
       cursor: pointer;
 
@@ -604,16 +642,35 @@
 
     .tabs {
 
-      max-width: 1200px;
+      position: absolute;
 
-      margin: 0 auto;
+      left: 3%;
+      right: 3%;
+      bottom: 2.5%;
+
+      width: 94%;
+
+      margin: 0;
 
       display: flex;
 
-      background: white;
+      background:
+        rgba(255,255,255,0.86);
 
-      border-top:
-        1px solid #ddd;
+      border:
+        1px solid rgba(0,0,0,0.08);
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.12);
+
+      pointer-events: auto;
+
+      z-index: 30;
 
     }
 
@@ -626,14 +683,17 @@
 
       border-radius: 0;
 
-      background: white;
+      background:
+        rgba(255,255,255,0.45);
 
       padding:
-        14px 5px;
+        8px 5px;
 
       margin: 0;
 
-      font-size: 16px;
+      font-size: 14px;
+
+      line-height: 1.25;
 
       cursor: pointer;
 
@@ -642,39 +702,70 @@
 
     .tab.active {
 
-      background: #f1f1f1;
+      background:
+        rgba(235,235,235,0.9);
 
       font-weight: bold;
 
     }
 
 
+    .tab:hover {
+
+      background:
+        rgba(245,245,245,0.95);
+
+    }
+
+
     /* ==========================
-       タブの中身
+       選択肢パネル
     ========================== */
 
     .panel {
 
-      max-width: 1200px;
+      position: absolute;
 
-      margin: 0 auto;
+      left: 8%;
+      right: 8%;
+      bottom: 12%;
 
-      background: white;
+      width: 84%;
 
-      padding: 15px;
+      margin: 0;
+
+      padding:
+        8px 10px;
+
+      background:
+        rgba(255,255,255,0.88);
+
+      border:
+        1px solid rgba(0,0,0,0.06);
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.10);
 
       text-align: center;
 
-      min-height: 100px;
+      pointer-events: auto;
+
+      z-index: 29;
 
     }
 
 
     .panel-title {
 
-      margin-top: 0;
+      margin:
+        0 0 5px 0;
 
-      font-size: 17px;
+      font-size: 14px;
+
+      line-height: 1.3;
 
     }
 
@@ -683,18 +774,20 @@
 
       border: none;
 
-      border-radius: 25px;
+      border-radius: 22px;
 
       padding:
-        12px 20px;
+        8px 18px;
 
-      margin: 5px;
+      margin:
+        3px;
 
-      font-size: 17px;
+      font-size: 14px;
 
       cursor: pointer;
 
-      background: #f2f2f2;
+      background:
+        rgba(242,242,242,0.92);
 
     }
 
@@ -702,6 +795,9 @@
     .panel button:hover {
 
       opacity: 0.75;
+
+      transform:
+        translateY(-1px);
 
     }
 
@@ -713,13 +809,16 @@
     @media (max-width: 600px) {
 
       body {
+
         background: #eee;
+
         overflow-x: hidden;
+
       }
 
 
       /* --------------------------------
-         部屋をスマホ画面いっぱいにする
+         スマホ用の部屋
       -------------------------------- */
 
       .room {
@@ -758,7 +857,7 @@
 
         left: 50%;
 
-        bottom: 28%;
+        bottom: 27%;
 
       }
 
@@ -769,11 +868,13 @@
 
       .message {
 
-        top: 22%;
+        top: 20%;
 
         left: 50%;
 
-        max-width: 80%;
+        width: auto;
+
+        max-width: 82%;
 
         padding:
           7px 14px;
@@ -832,15 +933,11 @@
 
       .status {
 
-        position: absolute;
-
         top: 8px;
         left: 50%;
 
         transform:
           translateX(-50%);
-
-        width: auto;
 
         min-width: 150px;
 
@@ -853,8 +950,6 @@
         border-radius: 20px;
 
         font-size: 13px;
-
-        z-index: 20;
 
       }
 
@@ -876,104 +971,24 @@
 
 
       /* --------------------------------
-         タブ
-         部屋の下側に重ねる
-      -------------------------------- */
-
-      .tabs {
-
-        position: absolute;
-
-        left: 3%;
-
-        right: 3%;
-
-        bottom: 3%;
-
-        width: 94%;
-
-        max-width: none;
-
-        margin: 0;
-
-        background:
-          rgba(255,255,255,0.92);
-
-        border:
-          1px solid rgba(0,0,0,0.08);
-
-        border-radius: 15px;
-
-        overflow: hidden;
-
-        box-shadow:
-          0 3px 12px
-          rgba(0,0,0,0.12);
-
-        z-index: 20;
-
-      }
-
-
-      .tab {
-
-        padding:
-          7px 2px;
-
-        font-size: 11px;
-
-        line-height: 1.2;
-
-        background:
-          rgba(255,255,255,0.75);
-
-      }
-
-
-      .tab.active {
-
-        background:
-          rgba(235,235,235,0.95);
-
-      }
-
-
-      /* --------------------------------
          選択肢パネル
-         部屋の下側に重ねる
       -------------------------------- */
 
       .panel {
 
-        position: absolute;
-
         left: 5%;
-
         right: 5%;
-
-        bottom: 13%;
+        bottom: 12%;
 
         width: 90%;
 
-        max-width: none;
-
-        min-height: 0;
-
-        margin: 0;
-
         padding:
-          7px 5px;
-
-        background:
-          rgba(255,255,255,0.90);
+          6px 5px;
 
         border-radius: 15px;
 
-        box-shadow:
-          0 3px 12px
-          rgba(0,0,0,0.10);
-
-        z-index: 19;
+        background:
+          rgba(255,255,255,0.88);
 
       }
 
@@ -1006,6 +1021,35 @@
 
       }
 
+
+      /* --------------------------------
+         タブ
+      -------------------------------- */
+
+      .tabs {
+
+        left: 3%;
+        right: 3%;
+        bottom: 3%;
+
+        width: 94%;
+
+        border-radius: 15px;
+
+      }
+
+
+      .tab {
+
+        padding:
+          7px 2px;
+
+        font-size: 11px;
+
+        line-height: 1.2;
+
+      }
+
     }
 
   </style>
@@ -1021,6 +1065,8 @@
   >
 
 
+    <!-- 中福 -->
+
     <img
       src="character/normal.png"
       alt="中福"
@@ -1030,6 +1076,8 @@
     >
 
 
+    <!-- おやつ -->
+
     <img
       src=""
       alt="おやつ"
@@ -1037,6 +1085,8 @@
       id="snack"
     >
 
+
+    <!-- 遊ぶりんご -->
 
     <img
       src="item/apple.png"
@@ -1046,8 +1096,12 @@
     >
 
 
+    <!-- 友達 -->
+
     <div id="friends"></div>
 
+
+    <!-- セリフ -->
 
     <div
       class="message"
@@ -1055,105 +1109,117 @@
     ></div>
 
 
+    <!-- ==========================
+         ゲームUI
+    ========================== -->
+
+    <div class="game-ui">
+
+
+      <!-- なかよし度 -->
+
+      <div class="status">
+
+        ❤️ なかよし度：
+        <span id="friendship">0</span>
+
+        <br>
+
+        <button
+          class="sound-button"
+          id="soundButton"
+          onclick="toggleSound()"
+        >
+          🔊 音ON
+        </button>
+
+      </div>
+
+
+      <!-- タブ -->
+
+      <div class="tabs">
+
+
+        <button
+          class="tab active"
+          id="tab-home"
+          onclick="openTab('home')"
+        >
+
+          🏠
+          <br>
+          お部屋
+
+        </button>
+
+
+        <button
+          class="tab"
+          id="tab-food"
+          onclick="openTab('food')"
+        >
+
+          🍚
+          <br>
+          ごはん
+
+        </button>
+
+
+        <button
+          class="tab"
+          id="tab-friends"
+          onclick="openTab('friends')"
+        >
+
+          🐟
+          <br>
+          友達
+
+        </button>
+
+
+        <button
+          class="tab"
+          id="tab-touch"
+          onclick="openTab('touch')"
+        >
+
+          💕
+          <br>
+          交流
+
+        </button>
+
+
+        <button
+          class="tab"
+          id="tab-out"
+          onclick="openTab('out')"
+        >
+
+          🌊
+          <br>
+          お出かけ
+
+        </button>
+
+
+      </div>
+
+
+      <!-- 選択肢 -->
+
+      <div
+        class="panel"
+        id="panel"
+      ></div>
+
+
+    </div>
+
   </div>
-
-
-
-  <div class="status">
-
-    ❤️ なかよし度：
-    <span id="friendship">0</span>
-
-    <br>
-
-    <button
-      class="sound-button"
-      id="soundButton"
-      onclick="toggleSound()"
-    >
-      🔊 音ON
-    </button>
-
-  </div>
-
-
-
-  <div class="tabs">
-
-
-    <button
-      class="tab active"
-      id="tab-home"
-      onclick="openTab('home')"
-    >
-
-      🏠
-      <br>
-      お部屋
-
-    </button>
-
-
-    <button
-      class="tab"
-      id="tab-food"
-      onclick="openTab('food')"
-    >
-
-      🍚
-      <br>
-      ごはん
-
-    </button>
-
-
-    <button
-      class="tab"
-      id="tab-friends"
-      onclick="openTab('friends')"
-    >
-
-      🐟
-      <br>
-      友達
-
-    </button>
-
-
-    <button
-      class="tab"
-      id="tab-touch"
-      onclick="openTab('touch')"
-    >
-
-      💕
-      <br>
-      交流
-
-    </button>
-
-
-    <button
-      class="tab"
-      id="tab-out"
-      onclick="openTab('out')"
-    >
-
-      🌊
-      <br>
-      お出かけ
-
-    </button>
-
-
-  </div>
-
-
-
-  <div
-    class="panel"
-    id="panel"
-  ></div>
 
 
 
@@ -1306,7 +1372,7 @@
 
 
     /* ==========================
-       中福がいる間の環境音
+       環境音
     ========================== */
 
     const backgroundSound =
@@ -2472,12 +2538,24 @@
 
       /*
          PCではroom1.jpg、
-         スマホではCSSで
-         room3smartphone.jpgを表示
+         スマホではroom3smartphone.jpg
       */
 
-      room.style.backgroundImage =
-        'url("background/room1.jpg")';
+      if (
+        window.innerWidth <= 600
+      ) {
+
+        room.style.backgroundImage =
+          'url("background/room3smartphone.jpg")';
+
+      }
+
+      else {
+
+        room.style.backgroundImage =
+          'url("background/room1.jpg")';
+
+      }
 
 
       chufuku.classList.remove(
