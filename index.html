@@ -609,24 +609,27 @@
 
       else if (tab === "touch") {
 
-        panel.innerHTML = `
+  panel.innerHTML = `
 
-          <p class="panel-title">
-            中福とふれあう
-          </p>
+    <p class="panel-title">
+      中福と交流する 🐡
+    </p>
 
-          <button onclick="petChufuku()">
-            🫳 なでる
-          </button>
+    <button onclick="petChufuku()">
+      🫳 なでる
+    </button>
 
-          <button onclick="hugChufuku()">
-            💕 触れ合う
-          </button>
+    <button onclick="bePetted()">
+      🥰 なでられる
+    </button>
 
-        `;
+    <button onclick="playTogether()">
+      🎮 遊んでもらう
+    </button>
 
-      }
+  `;
 
+}
 
 
       /* お出かけ */
@@ -674,11 +677,11 @@
 
         "呼んだ？",
 
-        "えへへ",
+        "我唯足知",
 
         "どうしたの？",
 
-        "いっしょにいる？"
+        "なにしてんの？"
 
       ];
 
@@ -727,89 +730,126 @@
 
     function petChufuku() {
 
-      const chufuku =
-        document.getElementById("chufuku");
+  const chufuku =
+    document.getElementById("chufuku");
 
-      const message =
-        document.getElementById("message");
-
-
-      chufuku.src =
-        "character/happy.png";
+  const message =
+    document.getElementById("message");
 
 
-      message.textContent =
-        "なでなで気持ちいい〜";
-
-      message.style.display =
-        "block";
+  chufuku.src =
+    "character/happy.png";
 
 
-      addFriendship(1);
+  message.textContent =
+    "うむ。悪くないね。";
+
+  message.style.display =
+    "block";
 
 
-      clearTimeout(reactionTimer);
+  addFriendship(1);
 
 
-      reactionTimer =
-        setTimeout(function() {
-
-          chufuku.src =
-            "character/normal.png";
-
-          message.style.display =
-            "none";
-
-        }, 2500);
-
-    }
+  clearTimeout(reactionTimer);
 
 
-
-    /* ==========================
-       触れ合う
-    ========================== */
-
-    function hugChufuku() {
-
-      const chufuku =
-        document.getElementById("chufuku");
-
-      const message =
-        document.getElementById("message");
-
+  reactionTimer =
+    setTimeout(function() {
 
       chufuku.src =
-        "character/heart.png";
-
-
-      message.textContent =
-        "いっしょにいるの、うれしいな";
+        "character/normal.png";
 
       message.style.display =
-        "block";
+        "none";
+
+    }, 2500);
+
+}
+
+    function bePetted() {
+
+  const chufuku =
+    document.getElementById("chufuku");
+
+  const message =
+    document.getElementById("message");
 
 
-      addFriendship(2);
+  chufuku.src =
+    "character/heart.png";
 
 
-      clearTimeout(reactionTimer);
+  message.textContent =
+    "うむ。";
+
+  message.style.display =
+    "block";
 
 
-      reactionTimer =
-        setTimeout(function() {
-
-          chufuku.src =
-            "character/normal.png";
-
-          message.style.display =
-            "none";
-
-        }, 3000);
-
-    }
+  addFriendship(2);
 
 
+  clearTimeout(reactionTimer);
+
+
+  reactionTimer =
+    setTimeout(function() {
+
+      chufuku.src =
+        "character/normal.png";
+
+      message.style.display =
+        "none";
+
+    }, 2500);
+
+}
+
+    function playTogether() {
+
+  const chufuku =
+    document.getElementById("chufuku");
+
+  const message =
+    document.getElementById("message");
+
+
+  chufuku.src =
+    "character/music.png";
+
+
+  message.textContent =
+    "あそんであげる!";
+
+  message.style.display =
+    "block";
+
+
+  chufuku.classList.add("happy");
+
+
+  addFriendship(2);
+
+
+  clearTimeout(reactionTimer);
+
+
+  reactionTimer =
+    setTimeout(function() {
+
+      chufuku.classList.remove("happy");
+
+      chufuku.src =
+        "character/normal.png";
+
+      message.style.display =
+        "none";
+
+    }, 3000);
+
+}
+    
 
     /* ==========================
        おやつ
