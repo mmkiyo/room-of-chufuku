@@ -556,13 +556,44 @@
 
       margin: 0 auto;
 
-      padding: 12px;
+      padding: 10px;
 
       background: white;
 
       text-align: center;
 
       font-size: 20px;
+
+    }
+
+
+    /* ==========================
+       音ボタン
+    ========================== */
+
+    .sound-button {
+
+      border: none;
+
+      border-radius: 20px;
+
+      background: #f2f2f2;
+
+      padding:
+        7px 16px;
+
+      margin-top: 6px;
+
+      font-size: 15px;
+
+      cursor: pointer;
+
+    }
+
+
+    .sound-button:hover {
+
+      opacity: 0.75;
 
     }
 
@@ -747,6 +778,16 @@
       }
 
 
+      .sound-button {
+
+        font-size: 14px;
+
+        padding:
+          6px 13px;
+
+      }
+
+
       .tab {
 
         font-size: 12px;
@@ -830,6 +871,16 @@
 
     ❤️ なかよし度：
     <span id="friendship">0</span>
+
+    <br>
+
+    <button
+      class="sound-button"
+      id="soundButton"
+      onclick="toggleSound()"
+    >
+      🔊 音ON
+    </button>
 
   </div>
 
@@ -964,16 +1015,71 @@
 
 
     /* ==========================
-       タイマー
+       リアクション用タイマー
     ========================== */
 
-    let reactionTimer;
+    let reactionTimers = [];
+
+
+    function setReactionTimer(
+      callback,
+      delay
+    ) {
+
+      const timer =
+        setTimeout(
+          function() {
+
+            reactionTimers =
+              reactionTimers.filter(
+                function(item) {
+                  return item !== timer;
+                }
+              );
+
+            callback();
+
+          },
+          delay
+        );
+
+
+      reactionTimers.push(
+        timer
+      );
+
+
+      return timer;
+
+    }
+
+
+    function clearReactionTimers() {
+
+      reactionTimers.forEach(
+        function(timer) {
+
+          clearTimeout(timer);
+
+        }
+      );
+
+
+      reactionTimers = [];
+
+    }
 
 
 
     /* ==========================
        音
     ========================== */
+
+    let soundEnabled =
+      localStorage.getItem(
+        "soundEnabled"
+      ) !== "false";
+
 
     const sounds = {
 
@@ -995,6 +1101,9 @@
       fishEat:
         new Audio("sounds/pichan2.mp3"),
 
+      potato:
+        new Audio("sounds/snacks(1).mp3"),
+
       land:
         new Audio("sounds/pichan.mp3"),
 
@@ -1011,27 +1120,38 @@
     const backgroundSound =
       new Audio("sounds/wave.mp3");
 
+
     backgroundSound.loop = true;
 
     backgroundSound.volume = 0.12;
 
 
+
     function playBackgroundSound() {
 
-      backgroundSound.play().catch(
-        function() {
+      if (!soundEnabled) return;
 
-          console.log(
-            "環境音を再生できませんでした"
-          );
 
-        }
-      );
+      backgroundSound
+        .play()
+        .catch(
+          function() {
+
+            console.log(
+              "環境音を再生できませんでした"
+            );
+
+          }
+        );
 
     }
 
 
+
     function playSound(name) {
+
+      if (!soundEnabled) return;
+
 
       const sound =
         sounds[name];
@@ -1052,6 +1172,158 @@
 
         }
       );
+
+    }
+
+
+
+    /* ==========================
+       全ての音を停止
+    ========================== */
+
+    function stopAllSounds() {
+
+      backgroundSound.pause();
+
+      backgroundSound.currentTime = 0;
+
+
+      Object.values(
+        sounds
+      ).forEach(
+        function(sound) {
+
+          sound.pause();
+
+          sound.currentTime = 0;
+
+        }
+      );
+
+    }
+
+
+
+    /* ==========================
+       音ON / OFF
+    ========================== */
+
+    function toggleSound() {
+
+      soundEnabled =
+        !soundEnabled;
+
+
+      localStorage.setItem(
+        "soundEnabled",
+        soundEnabled
+      );
+
+
+      const button =
+        document.getElementById(
+          "soundButton"
+        );
+
+
+      if (soundEnabled) {
+
+        button.textContent =
+          "🔊 音ON";
+
+
+        playBackgroundSound();
+
+      }
+
+      else {
+
+        button.textContent =
+          "🔇 音OFF";
+
+
+        stopAllSounds();
+
+      }
+
+    }
+
+
+
+    /* ==========================
+       中福を完全に初期状態へ戻す
+    ========================== */
+
+    function resetChufuku() {
+
+      const chufuku =
+        document.getElementById(
+          "chufuku"
+        );
+
+      const snack =
+        document.getElementById(
+          "snack"
+        );
+
+      const apple =
+        document.getElementById(
+          "playApple"
+        );
+
+      const message =
+        document.getElementById(
+          "message"
+        );
+
+
+      /* タイマー停止 */
+
+      clearReactionTimers();
+
+
+      /* アニメーション解除 */
+
+      chufuku.classList.remove(
+        "happy"
+      );
+
+      chufuku.classList.remove(
+        "playing"
+      );
+
+
+      /* 海にいる場合は
+         swimmingを勝手に解除しない */
+
+      /* 中福の画像を通常に戻す */
+
+      chufuku.src =
+        "character/normal.png";
+
+
+      /* 食べ物を消す */
+
+      snack.src = "";
+
+      snack.style.display =
+        "none";
+
+
+      /* 遊び用りんごを消す */
+
+      apple.classList.remove(
+        "playing"
+      );
+
+
+      /* セリフを消す */
+
+      message.textContent =
+        "";
+
+      message.style.display =
+        "none";
 
     }
 
@@ -1090,9 +1362,6 @@
           "active"
         );
 
-
-      /* ユーザーがタブを操作したら
-         環境音を開始 */
 
       playBackgroundSound();
 
@@ -1247,9 +1516,7 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      clearReactionTimers();
 
 
       playBackgroundSound();
@@ -1305,19 +1572,18 @@
       addFriendship(1);
 
 
-      reactionTimer =
-        setTimeout(
-          function() {
+      setReactionTimer(
+        function() {
 
-            chufuku.src =
-              "character/normal.png";
+          chufuku.src =
+            "character/normal.png";
 
-            message.style.display =
-              "none";
+          message.style.display =
+            "none";
 
-          },
-          2000
-        );
+        },
+        2000
+      );
 
     }
 
@@ -1340,9 +1606,7 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      clearReactionTimers();
 
 
       playBackgroundSound();
@@ -1370,19 +1634,18 @@
       addFriendship(1);
 
 
-      reactionTimer =
-        setTimeout(
-          function() {
+      setReactionTimer(
+        function() {
 
-            chufuku.src =
-              "character/normal.png";
+          chufuku.src =
+            "character/normal.png";
 
-            message.style.display =
-              "none";
+          message.style.display =
+            "none";
 
-          },
-          2500
-        );
+        },
+        2500
+      );
 
     }
 
@@ -1405,9 +1668,7 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      clearReactionTimers();
 
 
       playBackgroundSound();
@@ -1433,19 +1694,18 @@
       addFriendship(2);
 
 
-      reactionTimer =
-        setTimeout(
-          function() {
+      setReactionTimer(
+        function() {
 
-            chufuku.src =
-              "character/normal.png";
+          chufuku.src =
+            "character/normal.png";
 
-            message.style.display =
-              "none";
+          message.style.display =
+            "none";
 
-          },
-          2500
-        );
+        },
+        2500
+      );
 
     }
 
@@ -1473,9 +1733,7 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      clearReactionTimers();
 
 
       playBackgroundSound();
@@ -1517,41 +1775,40 @@
       addFriendship(2);
 
 
-      reactionTimer =
-        setTimeout(
-          function() {
+      setReactionTimer(
+        function() {
 
-            chufuku.classList.remove(
-              "playing"
-            );
-
-
-            apple.classList.remove(
-              "playing"
-            );
+          chufuku.classList.remove(
+            "playing"
+          );
 
 
-            chufuku.src =
-              "character/normal.png";
+          apple.classList.remove(
+            "playing"
+          );
 
 
-            message.textContent =
-              "たのしかった〜!";
+          chufuku.src =
+            "character/normal.png";
 
 
-            setTimeout(
-              function() {
+          message.textContent =
+            "たのしかった〜!";
 
-                message.style.display =
-                  "none";
 
-              },
-              1200
-            );
+          setReactionTimer(
+            function() {
 
-          },
-          7000
-        );
+              message.style.display =
+                "none";
+
+            },
+            1200
+          );
+
+        },
+        7000
+      );
 
     }
 
@@ -1584,13 +1841,15 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      /* 前のリアクションを完全停止 */
+
+      clearReactionTimers();
 
 
       playBackgroundSound();
 
+
+      /* 遊びを停止 */
 
       apple.classList.remove(
         "playing"
@@ -1606,8 +1865,14 @@
       );
 
 
+      /* いったん食べ物を消す */
+
       snack.style.display =
         "none";
+
+
+      snack.src =
+        "";
 
 
       message.style.display =
@@ -1615,7 +1880,9 @@
 
 
 
-      /* 魚 */
+      /* ==========================
+         魚
+      ========================== */
 
       if (type === "fish") {
 
@@ -1650,34 +1917,47 @@
         addFriendship(3);
 
 
-        reactionTimer =
-          setTimeout(
-            function() {
+        setReactionTimer(
+          function() {
 
-              chufuku.classList.remove(
-                "happy"
-              );
-
-
-              chufuku.src =
-                "character/heart.png";
+            chufuku.classList.remove(
+              "happy"
+            );
 
 
-              message.textContent =
-                "すごくおいしいー!";
+            chufuku.src =
+              "character/heart.png";
 
 
-            },
-            2000
-          );
+            message.textContent =
+              "すごくおいしいー!";
+
+
+            setReactionTimer(
+              function() {
+
+                resetChufuku();
+
+              },
+              1800
+            );
+
+          },
+          2000
+        );
 
       }
 
 
 
-      /* ポテチ */
+      /* ==========================
+         ポテチ
+      ========================== */
 
       else if (type === "potato") {
+
+        playSound("potato");
+
 
         snack.src =
           "item/potetocrisps.PNG";
@@ -1707,45 +1987,53 @@
         addFriendship(2);
 
 
-        reactionTimer =
-          setTimeout(
-            function() {
+        setReactionTimer(
+          function() {
 
-              chufuku.classList.remove(
-                "happy"
-              );
-
-
-              chufuku.src =
-                "character/tsurime.png";
+            chufuku.classList.remove(
+              "happy"
+            );
 
 
-              reactionTimer =
-                setTimeout(
+            chufuku.src =
+              "character/tsurime.png";
+
+
+            setReactionTimer(
+              function() {
+
+                chufuku.src =
+                  "character/tears.png";
+
+
+                message.textContent =
+                  "おなかわるい";
+
+
+                setReactionTimer(
                   function() {
 
-                    chufuku.src =
-                      "character/tears.png";
-
-
-                    message.textContent =
-                      "おなかわるい";
-
+                    resetChufuku();
 
                   },
-                  1200
+                  2000
                 );
 
+              },
+              1200
+            );
 
-            },
-            2000
-          );
+          },
+          2000
+        );
 
       }
 
 
 
-      /* りんご */
+      /* ==========================
+         りんご
+      ========================== */
 
       else if (type === "apple") {
 
@@ -1780,30 +2068,14 @@
         addFriendship(1);
 
 
-        reactionTimer =
-          setTimeout(
-            function() {
+        setReactionTimer(
+          function() {
 
-              chufuku.classList.remove(
-                "happy"
-              );
+            resetChufuku();
 
-
-              chufuku.src =
-                "character/normal.png";
-
-
-              snack.style.display =
-                "none";
-
-
-              message.style.display =
-                "none";
-
-
-            },
-            3000
-          );
+          },
+          3000
+        );
 
       }
 
@@ -1828,9 +2100,7 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      clearReactionTimers();
 
 
       playBackgroundSound();
@@ -1884,7 +2154,7 @@
       addFriendship(2);
 
 
-      setTimeout(
+      setReactionTimer(
         function() {
 
           message.textContent =
@@ -1895,7 +2165,7 @@
       );
 
 
-      setTimeout(
+      setReactionTimer(
         function() {
 
           message.textContent =
@@ -1906,11 +2176,15 @@
       );
 
 
-      setTimeout(
+      setReactionTimer(
         function() {
 
           message.style.display =
             "none";
+
+
+          friends.innerHTML =
+            "";
 
         },
         6200
@@ -1942,9 +2216,7 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      clearReactionTimers();
 
 
       playBackgroundSound();
@@ -1961,9 +2233,18 @@
       );
 
 
+      chufuku.classList.remove(
+        "happy"
+      );
+
+
       chufuku.classList.add(
         "swimming"
       );
+
+
+      chufuku.src =
+        "character/normal.png";
 
 
       message.textContent =
@@ -1974,7 +2255,7 @@
         "block";
 
 
-      setTimeout(
+      setReactionTimer(
         function() {
 
           message.style.display =
@@ -2010,9 +2291,7 @@
         );
 
 
-      clearTimeout(
-        reactionTimer
-      );
+      clearReactionTimers();
 
 
       playBackgroundSound();
@@ -2032,6 +2311,14 @@
         "playing"
       );
 
+      chufuku.classList.remove(
+        "happy"
+      );
+
+
+      chufuku.src =
+        "character/normal.png";
+
 
       message.textContent =
         "お部屋に帰ってきたよ!";
@@ -2041,7 +2328,7 @@
         "block";
 
 
-      setTimeout(
+      setReactionTimer(
         function() {
 
           message.style.display =
@@ -2056,8 +2343,40 @@
 
 
     /* ==========================
+       音ボタンの初期表示
+    ========================== */
+
+    function updateSoundButton() {
+
+      const button =
+        document.getElementById(
+          "soundButton"
+        );
+
+
+      if (soundEnabled) {
+
+        button.textContent =
+          "🔊 音ON";
+
+      }
+
+      else {
+
+        button.textContent =
+          "🔇 音OFF";
+
+      }
+
+    }
+
+
+
+    /* ==========================
        最初のタブ
     ========================== */
+
+    updateSoundButton();
 
     openTab("home");
 
