@@ -712,55 +712,112 @@
 
     @media (max-width: 600px) {
 
+      body {
+        background: #eee;
+        overflow-x: hidden;
+      }
+
+
+      /* --------------------------------
+         部屋をスマホ画面いっぱいにする
+      -------------------------------- */
+
       .room {
 
-        aspect-ratio: 4 / 5;
+        width: 100%;
+
+        height: 100svh;
+
+        min-height: 620px;
+
+        max-height: 900px;
+
+        aspect-ratio: auto;
+
+        margin: 0;
+
+        background-image:
+          url("background/room3smartphone.jpg");
+
+        background-size: cover;
+
+        background-position: center;
 
       }
 
+
+      /* --------------------------------
+         中福
+      -------------------------------- */
 
       .chufuku {
 
-        width: 62%;
+        width: 55%;
 
-        bottom: 8%;
+        max-width: none;
+
+        left: 50%;
+
+        bottom: 28%;
 
       }
 
 
+      /* --------------------------------
+         セリフ
+      -------------------------------- */
+
       .message {
 
-        top: 4%;
+        top: 22%;
 
-        font-size: 16px;
+        left: 50%;
+
+        max-width: 80%;
 
         padding:
-          10px 16px;
+          7px 14px;
 
-        max-width: 85%;
+        border-radius: 15px;
+
+        font-size: 14px;
+
+        line-height: 1.35;
 
         white-space: normal;
 
       }
 
 
+      /* --------------------------------
+         おやつ
+      -------------------------------- */
+
       .snack {
 
-        width: 70px;
+        width: 65px;
 
-        left: 22%;
+        left: 30%;
 
-        bottom: 30%;
+        bottom: 31%;
 
       }
 
+
+      /* --------------------------------
+         遊んでいるりんご
+      -------------------------------- */
 
       .play-apple {
 
-        width: 50px;
+        width: 48px;
 
       }
 
+
+      /* --------------------------------
+         友達の魚
+      -------------------------------- */
 
       .friend-fish {
 
@@ -769,48 +826,183 @@
       }
 
 
+      /* --------------------------------
+         なかよし度
+      -------------------------------- */
+
       .status {
 
-        font-size: 17px;
+        position: absolute;
 
-        padding: 10px;
+        top: 8px;
+        left: 50%;
+
+        transform:
+          translateX(-50%);
+
+        width: auto;
+
+        min-width: 150px;
+
+        padding:
+          5px 10px;
+
+        background:
+          rgba(255,255,255,0.88);
+
+        border-radius: 20px;
+
+        font-size: 13px;
+
+        z-index: 20;
 
       }
 
 
+      /* --------------------------------
+         音ボタン
+      -------------------------------- */
+
       .sound-button {
 
-        font-size: 14px;
+        margin-top: 3px;
 
         padding:
-          6px 13px;
+          4px 10px;
+
+        font-size: 11px;
+
+      }
+
+
+      /* --------------------------------
+         タブ
+         部屋の下側に重ねる
+      -------------------------------- */
+
+      .tabs {
+
+        position: absolute;
+
+        left: 3%;
+
+        right: 3%;
+
+        bottom: 3%;
+
+        width: 94%;
+
+        max-width: none;
+
+        margin: 0;
+
+        background:
+          rgba(255,255,255,0.92);
+
+        border:
+          1px solid rgba(0,0,0,0.08);
+
+        border-radius: 15px;
+
+        overflow: hidden;
+
+        box-shadow:
+          0 3px 12px
+          rgba(0,0,0,0.12);
+
+        z-index: 20;
 
       }
 
 
       .tab {
 
-        font-size: 12px;
-
         padding:
-          10px 2px;
+          7px 2px;
+
+        font-size: 11px;
+
+        line-height: 1.2;
+
+        background:
+          rgba(255,255,255,0.75);
 
       }
 
 
+      .tab.active {
+
+        background:
+          rgba(235,235,235,0.95);
+
+      }
+
+
+      /* --------------------------------
+         選択肢パネル
+         部屋の下側に重ねる
+      -------------------------------- */
+
       .panel {
 
-        padding: 10px;
+        position: absolute;
+
+        left: 5%;
+
+        right: 5%;
+
+        bottom: 13%;
+
+        width: 90%;
+
+        max-width: none;
+
+        min-height: 0;
+
+        margin: 0;
+
+        padding:
+          7px 5px;
+
+        background:
+          rgba(255,255,255,0.90);
+
+        border-radius: 15px;
+
+        box-shadow:
+          0 3px 12px
+          rgba(0,0,0,0.10);
+
+        z-index: 19;
+
+      }
+
+
+      .panel-title {
+
+        margin:
+          0 0 3px 0;
+
+        font-size: 12px;
+
+        line-height: 1.2;
 
       }
 
 
       .panel button {
 
-        font-size: 15px;
-
         padding:
-          10px 15px;
+          7px 10px;
+
+        margin:
+          2px;
+
+        border-radius: 18px;
+
+        font-size: 12px;
+
+        line-height: 1.2;
 
       }
 
@@ -1277,12 +1469,8 @@
         );
 
 
-      /* タイマー停止 */
-
       clearReactionTimers();
 
-
-      /* アニメーション解除 */
 
       chufuku.classList.remove(
         "happy"
@@ -1293,16 +1481,9 @@
       );
 
 
-      /* 海にいる場合は
-         swimmingを勝手に解除しない */
-
-      /* 中福の画像を通常に戻す */
-
       chufuku.src =
         "character/normal.png";
 
-
-      /* 食べ物を消す */
 
       snack.src = "";
 
@@ -1310,14 +1491,10 @@
         "none";
 
 
-      /* 遊び用りんごを消す */
-
       apple.classList.remove(
         "playing"
       );
 
-
-      /* セリフを消す */
 
       message.textContent =
         "";
@@ -1841,15 +2018,11 @@
         );
 
 
-      /* 前のリアクションを完全停止 */
-
       clearReactionTimers();
 
 
       playBackgroundSound();
 
-
-      /* 遊びを停止 */
 
       apple.classList.remove(
         "playing"
@@ -1864,8 +2037,6 @@
         "playing"
       );
 
-
-      /* いったん食べ物を消す */
 
       snack.style.display =
         "none";
@@ -2298,6 +2469,12 @@
 
       playSound("land");
 
+
+      /*
+         PCではroom1.jpg、
+         スマホではCSSで
+         room3smartphone.jpgを表示
+      */
 
       room.style.backgroundImage =
         'url("background/room1.jpg")';
