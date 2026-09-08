@@ -20,7 +20,7 @@
 
 
     /* ==========================
-       中福のいる画面
+       中福のいるゲーム画面
     ========================== */
 
     .room {
@@ -51,7 +51,7 @@
       max-width: 400px;
 
       left: 50%;
-      bottom: 5%;
+      bottom: 7%;
 
       transform:
         translateX(-50%);
@@ -397,14 +397,15 @@
       position: absolute;
 
       left: 50%;
-      top: 7%;
+      top: 8%;
 
       transform:
         translateX(-50%);
 
       max-width: 75%;
 
-      background: rgba(255,255,255,0.94);
+      background:
+        rgba(255,255,255,0.94);
 
       padding:
         11px 22px;
@@ -551,8 +552,7 @@
 
 
     /* ==========================
-       ゲームUI
-       部屋の上に重ねる
+       ゲームUI全体
     ========================== */
 
     .game-ui {
@@ -569,8 +569,7 @@
 
 
     /* ==========================
-       なかよし度
-       PC：左上
+       ステータス
     ========================== */
 
     .status {
@@ -588,13 +587,15 @@
 
       border-radius: 20px;
 
-      font-size: 15px;
-
       text-align: center;
+
+      font-size: 14px;
+
+      line-height: 1.4;
 
       box-shadow:
         0 2px 8px
-        rgba(0,0,0,0.10);
+        rgba(0,0,0,0.08);
 
       pointer-events: auto;
 
@@ -613,14 +614,15 @@
 
       border-radius: 20px;
 
-      background: #f2f2f2;
+      background:
+        rgba(242,242,242,0.9);
 
       padding:
-        5px 12px;
+        4px 10px;
 
-      margin-top: 4px;
+      margin-top: 3px;
 
-      font-size: 13px;
+      font-size: 12px;
 
       cursor: pointer;
 
@@ -636,7 +638,6 @@
 
     /* ==========================
        タブ
-       PC：部屋の下側
     ========================== */
 
     .tabs {
@@ -645,22 +646,21 @@
 
       left: 3%;
       right: 3%;
-
       bottom: 2.5%;
 
       width: 94%;
 
-      display: flex;
-
       margin: 0;
 
+      display: flex;
+
       background:
-        rgba(255,255,255,0.90);
+        rgba(255,255,255,0.86);
 
       border:
         1px solid rgba(0,0,0,0.08);
 
-      border-radius: 15px;
+      border-radius: 18px;
 
       overflow: hidden;
 
@@ -684,7 +684,7 @@
       border-radius: 0;
 
       background:
-        rgba(255,255,255,0.70);
+        rgba(255,255,255,0.45);
 
       padding:
         8px 5px;
@@ -693,7 +693,7 @@
 
       font-size: 14px;
 
-      line-height: 1.2;
+      line-height: 1.25;
 
       cursor: pointer;
 
@@ -703,32 +703,34 @@
     .tab.active {
 
       background:
-        rgba(235,235,235,0.95);
+        rgba(235,235,235,0.9);
 
       font-weight: bold;
 
     }
 
 
+    .tab:hover {
+
+      background:
+        rgba(245,245,245,0.95);
+
+    }
+
+
     /* ==========================
        選択肢パネル
-       PC：左寄りに配置
-       中福のしっぽを避ける
     ========================== */
 
     .panel {
 
       position: absolute;
 
-      left: 4%;
-
-      right: auto;
-
+      left: 8%;
+      right: 8%;
       bottom: 12%;
 
-      width: 78%;
-
-      max-width: none;
+      width: 84%;
 
       margin: 0;
 
@@ -739,7 +741,7 @@
         rgba(255,255,255,0.88);
 
       border:
-        1px solid rgba(0,0,0,0.08);
+        1px solid rgba(0,0,0,0.06);
 
       border-radius: 18px;
 
@@ -748,8 +750,6 @@
         rgba(0,0,0,0.10);
 
       text-align: center;
-
-      min-height: 0;
 
       pointer-events: auto;
 
@@ -761,11 +761,11 @@
     .panel-title {
 
       margin:
-        0 0 4px 0;
+        0 0 5px 0;
 
-      font-size: 15px;
+      font-size: 14px;
 
-      line-height: 1.2;
+      line-height: 1.3;
 
     }
 
@@ -774,18 +774,20 @@
 
       border: none;
 
-      border-radius: 25px;
+      border-radius: 22px;
 
       padding:
-        8px 17px;
+        8px 18px;
 
-      margin: 3px;
+      margin:
+        3px;
 
-      font-size: 15px;
+      font-size: 14px;
 
       cursor: pointer;
 
-      background: #f2f2f2;
+      background:
+        rgba(242,242,242,0.92);
 
     }
 
@@ -793,6 +795,9 @@
     .panel button:hover {
 
       opacity: 0.75;
+
+      transform:
+        translateY(-1px);
 
     }
 
@@ -813,7 +818,7 @@
 
 
       /* --------------------------------
-         部屋をスマホ画面いっぱいにする
+         スマホ用の部屋
       -------------------------------- */
 
       .room {
@@ -852,7 +857,7 @@
 
         left: 50%;
 
-        bottom: 28%;
+        bottom: 27%;
 
       }
 
@@ -928,15 +933,11 @@
 
       .status {
 
-        position: absolute;
-
         top: 8px;
         left: 50%;
 
         transform:
           translateX(-50%);
-
-        width: auto;
 
         min-width: 150px;
 
@@ -949,8 +950,6 @@
         border-radius: 20px;
 
         font-size: 13px;
-
-        z-index: 25;
 
       }
 
@@ -972,104 +971,24 @@
 
 
       /* --------------------------------
-         タブ
-         部屋の下側に重ねる
-      -------------------------------- */
-
-      .tabs {
-
-        position: absolute;
-
-        left: 3%;
-
-        right: 3%;
-
-        bottom: 3%;
-
-        width: 94%;
-
-        max-width: none;
-
-        margin: 0;
-
-        background:
-          rgba(255,255,255,0.92);
-
-        border:
-          1px solid rgba(0,0,0,0.08);
-
-        border-radius: 15px;
-
-        overflow: hidden;
-
-        box-shadow:
-          0 3px 12px
-          rgba(0,0,0,0.12);
-
-        z-index: 30;
-
-      }
-
-
-      .tab {
-
-        padding:
-          7px 2px;
-
-        font-size: 11px;
-
-        line-height: 1.2;
-
-        background:
-          rgba(255,255,255,0.75);
-
-      }
-
-
-      .tab.active {
-
-        background:
-          rgba(235,235,235,0.95);
-
-      }
-
-
-      /* --------------------------------
          選択肢パネル
-         スマホ：中央
       -------------------------------- */
 
       .panel {
 
-        position: absolute;
-
         left: 5%;
-
         right: 5%;
-
-        bottom: 13%;
+        bottom: 12%;
 
         width: 90%;
 
-        max-width: none;
-
-        min-height: 0;
-
-        margin: 0;
-
         padding:
-          7px 5px;
-
-        background:
-          rgba(255,255,255,0.90);
+          6px 5px;
 
         border-radius: 15px;
 
-        box-shadow:
-          0 3px 12px
-          rgba(0,0,0,0.10);
-
-        z-index: 29;
+        background:
+          rgba(255,255,255,0.88);
 
       }
 
@@ -1097,6 +1016,35 @@
         border-radius: 18px;
 
         font-size: 12px;
+
+        line-height: 1.2;
+
+      }
+
+
+      /* --------------------------------
+         タブ
+      -------------------------------- */
+
+      .tabs {
+
+        left: 3%;
+        right: 3%;
+        bottom: 3%;
+
+        width: 94%;
+
+        border-radius: 15px;
+
+      }
+
+
+      .tab {
+
+        padding:
+          7px 2px;
+
+        font-size: 11px;
 
         line-height: 1.2;
 
@@ -1138,7 +1086,7 @@
     >
 
 
-    <!-- 遊んでいるりんご -->
+    <!-- 遊ぶりんご -->
 
     <img
       src="item/apple.png"
@@ -1162,7 +1110,7 @@
 
 
     <!-- ==========================
-         部屋の上に表示するUI
+         ゲームUI
     ========================== -->
 
     <div class="game-ui">
@@ -1198,9 +1146,11 @@
           id="tab-home"
           onclick="openTab('home')"
         >
+
           🏠
           <br>
           お部屋
+
         </button>
 
 
@@ -1209,9 +1159,11 @@
           id="tab-food"
           onclick="openTab('food')"
         >
+
           🍚
           <br>
           ごはん
+
         </button>
 
 
@@ -1220,9 +1172,11 @@
           id="tab-friends"
           onclick="openTab('friends')"
         >
+
           🐟
           <br>
           友達
+
         </button>
 
 
@@ -1231,9 +1185,11 @@
           id="tab-touch"
           onclick="openTab('touch')"
         >
+
           💕
           <br>
           交流
+
         </button>
 
 
@@ -1242,9 +1198,11 @@
           id="tab-out"
           onclick="openTab('out')"
         >
+
           🌊
           <br>
           お出かけ
+
         </button>
 
 
@@ -1260,7 +1218,6 @@
 
 
     </div>
-
 
   </div>
 
@@ -1402,8 +1359,6 @@
       fishEat:
         new Audio("sounds/pichan2.mp3"),
 
-      /* ポテチの音 */
-
       potato:
         new Audio("sounds/snacks(1).mp3"),
 
@@ -1417,7 +1372,7 @@
 
 
     /* ==========================
-       中福がいる間の環境音
+       環境音
     ========================== */
 
     const backgroundSound =
@@ -2238,8 +2193,6 @@
 
       else if (type === "potato") {
 
-        /* ポテチの音 */
-
         playSound("potato");
 
 
@@ -2555,7 +2508,6 @@
 
     /* ==========================
        陸へ戻る
-       PCとスマホで背景を分ける
     ========================== */
 
     function goLand() {
@@ -2585,14 +2537,13 @@
 
 
       /*
-        PC：
-        room1.jpg
-
-        スマホ：
-        room3smartphone.jpg
+         PCではroom1.jpg、
+         スマホではroom3smartphone.jpg
       */
 
-      if (window.innerWidth <= 600) {
+      if (
+        window.innerWidth <= 600
+      ) {
 
         room.style.backgroundImage =
           'url("background/room3smartphone.jpg")';
