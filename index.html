@@ -28,6 +28,7 @@
       margin: 0 auto;
       aspect-ratio: 16 / 9;
       overflow: hidden;
+
       background-image: url("background/room1.jpg");
       background-size: cover;
       background-position: center;
@@ -40,85 +41,191 @@
 
     .chufuku {
       position: absolute;
+
       width: 35%;
       max-width: 400px;
+
       left: 50%;
       bottom: 5%;
+
       transform: translateX(-50%);
+
       cursor: pointer;
+
+      z-index: 4;
 
       /* 普段のゆらゆら */
       animation: float 3s ease-in-out infinite;
     }
 
 
-    /* 海で泳いでいる感じ */
-    .chufuku.swimming {
-      animation: swim 3s ease-in-out infinite;
-    }
-
-
     /* 普段のぷかぷか */
+
     @keyframes float {
 
       0% {
-        transform: translateX(-50%) translateY(0) rotate(0deg);
+        transform:
+          translateX(-50%)
+          translateY(0)
+          rotate(0deg);
       }
 
       50% {
-        transform: translateX(-50%) translateY(-8px) rotate(-1deg);
+        transform:
+          translateX(-50%)
+          translateY(-8px)
+          rotate(-1deg);
       }
 
       100% {
-        transform: translateX(-50%) translateY(0) rotate(0deg);
+        transform:
+          translateX(-50%)
+          translateY(0)
+          rotate(0deg);
       }
 
     }
 
 
-    /* 海で泳ぐ */
+    /* ==========================
+       海で泳ぐ
+    ========================== */
+
+    .chufuku.swimming {
+
+      animation:
+        swim 3s ease-in-out infinite;
+
+    }
+
+
     @keyframes swim {
 
       0% {
-        transform: translateX(-50%) translateY(0) rotate(-2deg);
+        transform:
+          translateX(-50%)
+          translateY(0)
+          rotate(-2deg);
       }
 
       25% {
-        transform: translateX(-48%) translateY(-12px) rotate(2deg);
+        transform:
+          translateX(-48%)
+          translateY(-12px)
+          rotate(2deg);
       }
 
       50% {
-        transform: translateX(-50%) translateY(0) rotate(-2deg);
+        transform:
+          translateX(-50%)
+          translateY(0)
+          rotate(-2deg);
       }
 
       75% {
-        transform: translateX(-52%) translateY(10px) rotate(2deg);
+        transform:
+          translateX(-52%)
+          translateY(10px)
+          rotate(2deg);
       }
 
       100% {
-        transform: translateX(-50%) translateY(0) rotate(-2deg);
+        transform:
+          translateX(-50%)
+          translateY(0)
+          rotate(-2deg);
       }
 
     }
 
 
-    /* 喜ぶ */
+    /* ==========================
+       喜ぶ
+    ========================== */
+
     .chufuku.happy {
-      animation: happy 0.5s ease-in-out 2;
+
+      animation:
+        happy 0.5s ease-in-out 2;
+
     }
+
 
     @keyframes happy {
 
       0% {
-        transform: translateX(-50%) translateY(0);
+        transform:
+          translateX(-50%)
+          translateY(0);
       }
 
       50% {
-        transform: translateX(-50%) translateY(-20px);
+        transform:
+          translateX(-50%)
+          translateY(-20px);
       }
 
       100% {
-        transform: translateX(-50%) translateY(0);
+        transform:
+          translateX(-50%)
+          translateY(0);
+      }
+
+    }
+
+
+    /* ==========================
+       遊び回る
+    ========================== */
+
+    .chufuku.playing {
+
+      animation:
+        playMove 3s ease-in-out;
+
+    }
+
+
+    @keyframes playMove {
+
+      0% {
+        left: 50%;
+        bottom: 8%;
+        transform:
+          translateX(-50%)
+          rotate(0deg);
+      }
+
+      20% {
+        left: 25%;
+        bottom: 18%;
+        transform:
+          translateX(-50%)
+          rotate(-5deg);
+      }
+
+      45% {
+        left: 70%;
+        bottom: 12%;
+        transform:
+          translateX(-50%)
+          rotate(5deg);
+      }
+
+      70% {
+        left: 35%;
+        bottom: 25%;
+        transform:
+          translateX(-50%)
+          rotate(-4deg);
+      }
+
+      100% {
+        left: 50%;
+        bottom: 8%;
+        transform:
+          translateX(-50%)
+          rotate(0deg);
       }
 
     }
@@ -129,13 +236,23 @@
     ========================== */
 
     .snack {
+
       position: absolute;
+
       width: 100px;
+
       left: 50%;
       bottom: 28%;
-      transform: translateX(-50%);
+
+      transform:
+        translateX(-50%);
+
       display: none;
+
       pointer-events: none;
+
+      z-index: 6;
+
     }
 
 
@@ -144,24 +261,156 @@
     ========================== */
 
     .message {
+
       position: absolute;
+
       left: 50%;
       top: 7%;
-      transform: translateX(-50%);
+
+      transform:
+        translateX(-50%);
 
       background: white;
-      padding: 15px 25px;
+
+      padding:
+        15px 25px;
+
       border-radius: 20px;
 
       font-size: 20px;
 
       display: none;
 
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.15);
 
       white-space: nowrap;
 
+      text-align: center;
+
       z-index: 10;
+
+    }
+
+
+    /* ==========================
+       友達の魚
+    ========================== */
+
+    .friend-fish {
+
+      position: absolute;
+
+      width: 70px;
+
+      left: -100px;
+
+      pointer-events: none;
+
+      z-index: 3;
+
+    }
+
+
+    .friend-fish.fish1 {
+      animation:
+        fishCome1 5s linear forwards;
+    }
+
+    .friend-fish.fish2 {
+      animation:
+        fishCome2 5.5s linear forwards;
+    }
+
+    .friend-fish.fish3 {
+      animation:
+        fishCome3 5.2s linear forwards;
+    }
+
+    .friend-fish.fish4 {
+      animation:
+        fishCome4 5.8s linear forwards;
+    }
+
+    .friend-fish.fish5 {
+      animation:
+        fishCome5 5.3s linear forwards;
+    }
+
+
+    @keyframes fishCome1 {
+
+      0% {
+        left: -100px;
+        bottom: 30%;
+      }
+
+      100% {
+        left: 85%;
+        bottom: 42%;
+      }
+
+    }
+
+
+    @keyframes fishCome2 {
+
+      0% {
+        left: -100px;
+        bottom: 42%;
+      }
+
+      100% {
+        left: 75%;
+        bottom: 25%;
+      }
+
+    }
+
+
+    @keyframes fishCome3 {
+
+      0% {
+        left: -100px;
+        bottom: 25%;
+      }
+
+      100% {
+        left: 90%;
+        bottom: 55%;
+      }
+
+    }
+
+
+    @keyframes fishCome4 {
+
+      0% {
+        left: -100px;
+        bottom: 55%;
+      }
+
+      100% {
+        left: 65%;
+        bottom: 35%;
+      }
+
+    }
+
+
+    @keyframes fishCome5 {
+
+      0% {
+        left: -100px;
+        bottom: 38%;
+      }
+
+      100% {
+        left: 80%;
+        bottom: 60%;
+      }
+
     }
 
 
@@ -170,12 +419,19 @@
     ========================== */
 
     .status {
+
       max-width: 1200px;
+
       margin: 0 auto;
+
       padding: 12px;
+
       background: white;
+
       text-align: center;
+
       font-size: 20px;
+
     }
 
 
@@ -184,38 +440,49 @@
     ========================== */
 
     .tabs {
+
       max-width: 1200px;
+
       margin: 0 auto;
 
       display: flex;
 
       background: white;
 
-      border-top: 1px solid #ddd;
+      border-top:
+        1px solid #ddd;
+
     }
 
 
     .tab {
+
       flex: 1;
 
       border: none;
+
       border-radius: 0;
 
       background: white;
 
-      padding: 14px 5px;
+      padding:
+        14px 5px;
 
       margin: 0;
 
       font-size: 16px;
 
       cursor: pointer;
+
     }
 
 
     .tab.active {
+
       background: #f1f1f1;
+
       font-weight: bold;
+
     }
 
 
@@ -236,12 +503,16 @@
       text-align: center;
 
       min-height: 100px;
+
     }
 
 
     .panel-title {
+
       margin-top: 0;
+
       font-size: 17px;
+
     }
 
 
@@ -251,7 +522,8 @@
 
       border-radius: 25px;
 
-      padding: 12px 20px;
+      padding:
+        12px 20px;
 
       margin: 5px;
 
@@ -260,11 +532,14 @@
       cursor: pointer;
 
       background: #f2f2f2;
+
     }
 
 
     .panel button:hover {
+
       opacity: 0.75;
+
     }
 
 
@@ -275,7 +550,9 @@
     @media (max-width: 600px) {
 
       .room {
+
         aspect-ratio: 4 / 5;
+
       }
 
 
@@ -288,7 +565,7 @@
       }
 
 
-      /* セリフを上の方へ */
+      /* セリフを上へ */
 
       .message {
 
@@ -296,18 +573,17 @@
 
         font-size: 16px;
 
-        padding: 10px 16px;
+        padding:
+          10px 16px;
 
         max-width: 85%;
 
         white-space: normal;
 
-        text-align: center;
-
       }
 
 
-      /* 食べ物を中福の横へ */
+      /* おやつを中福の横へ */
 
       .snack {
 
@@ -316,6 +592,15 @@
         left: 22%;
 
         bottom: 30%;
+
+      }
+
+
+      /* 魚の友達 */
+
+      .friend-fish {
+
+        width: 48px;
 
       }
 
@@ -331,9 +616,10 @@
 
       .tab {
 
-        font-size: 14px;
+        font-size: 13px;
 
-        padding: 12px 3px;
+        padding:
+          10px 2px;
 
       }
 
@@ -349,7 +635,8 @@
 
         font-size: 15px;
 
-        padding: 10px 15px;
+        padding:
+          10px 15px;
 
       }
 
@@ -366,7 +653,10 @@
        中福の部屋
   ========================== -->
 
-  <div class="room" id="room">
+  <div
+    class="room"
+    id="room"
+  >
 
 
     <!-- 中福 -->
@@ -390,15 +680,21 @@
     >
 
 
+    <!-- 友達 -->
+
+    <div id="friends"></div>
+
+
     <!-- セリフ -->
 
     <div
       class="message"
-      id="message">
-    </div>
+      id="message"
+    ></div>
 
 
   </div>
+
 
 
   <!-- ==========================
@@ -413,6 +709,7 @@
   </div>
 
 
+
   <!-- ==========================
        タブ
   ========================== -->
@@ -423,7 +720,8 @@
     <button
       class="tab active"
       id="tab-home"
-      onclick="openTab('home')">
+      onclick="openTab('home')"
+    >
 
       🏠
       <br>
@@ -435,7 +733,8 @@
     <button
       class="tab"
       id="tab-food"
-      onclick="openTab('food')">
+      onclick="openTab('food')"
+    >
 
       🍚
       <br>
@@ -446,8 +745,22 @@
 
     <button
       class="tab"
+      id="tab-friends"
+      onclick="openTab('friends')"
+    >
+
+      🐟
+      <br>
+      友達
+
+    </button>
+
+
+    <button
+      class="tab"
       id="tab-touch"
-      onclick="openTab('touch')">
+      onclick="openTab('touch')"
+    >
 
       💕
       <br>
@@ -459,7 +772,8 @@
     <button
       class="tab"
       id="tab-out"
-      onclick="openTab('out')">
+      onclick="openTab('out')"
+    >
 
       🌊
       <br>
@@ -471,15 +785,16 @@
   </div>
 
 
+
   <!-- ==========================
        タブの中身
   ========================== -->
 
   <div
     class="panel"
-    id="panel">
+    id="panel"
+  ></div>
 
-  </div>
 
 
   <script>
@@ -490,11 +805,16 @@
     ========================== */
 
     let friendship =
-      Number(localStorage.getItem("friendship")) || 0;
+      Number(
+        localStorage.getItem("friendship")
+      ) || 0;
 
 
-    document.getElementById("friendship").textContent =
+    document.getElementById(
+      "friendship"
+    ).textContent =
       friendship;
+
 
 
     function addFriendship(amount) {
@@ -503,7 +823,9 @@
 
 
       if (friendship > 100) {
+
         friendship = 100;
+
       }
 
 
@@ -513,7 +835,9 @@
       );
 
 
-      document.getElementById("friendship").textContent =
+      document.getElementById(
+        "friendship"
+      ).textContent =
         friendship;
 
     }
@@ -535,29 +859,39 @@
     function openTab(tab) {
 
       const panel =
-        document.getElementById("panel");
+        document.getElementById(
+          "panel"
+        );
 
 
       /* 全タブをリセット */
 
-      document.querySelectorAll(".tab").forEach(
-        function(button) {
+      document
+        .querySelectorAll(".tab")
+        .forEach(
+          function(button) {
 
-          button.classList.remove("active");
+            button.classList.remove(
+              "active"
+            );
 
-        }
-      );
+          }
+        );
 
 
       /* 選択されたタブ */
 
       document
-        .getElementById("tab-" + tab)
+        .getElementById(
+          "tab-" + tab
+        )
         .classList.add("active");
 
 
 
-      /* お部屋 */
+      /* ======================
+         お部屋
+      ====================== */
 
       if (tab === "home") {
 
@@ -567,7 +901,9 @@
             中福のお部屋
           </p>
 
-          <button onclick="touchChufuku()">
+          <button
+            onclick="touchChufuku()"
+          >
             🦭 中福に話しかける
           </button>
 
@@ -577,7 +913,9 @@
 
 
 
-      /* ごはん */
+      /* ======================
+         ごはん
+      ====================== */
 
       else if (tab === "food") {
 
@@ -587,15 +925,21 @@
             中福に何をあげる？
           </p>
 
-          <button onclick="giveSnack('fish')">
+          <button
+            onclick="giveSnack('fish')"
+          >
             🐟 魚
           </button>
 
-          <button onclick="giveSnack('potato')">
+          <button
+            onclick="giveSnack('potato')"
+          >
             🍟 ポテチ
           </button>
 
-          <button onclick="giveSnack('apple')">
+          <button
+            onclick="giveSnack('apple')"
+          >
             🍎 りんご
           </button>
 
@@ -605,34 +949,69 @@
 
 
 
-      /* ふれあい */
+      /* ======================
+         友達
+      ====================== */
+
+      else if (tab === "friends") {
+
+        panel.innerHTML = `
+
+          <p class="panel-title">
+            中福の友達
+          </p>
+
+          <button
+            onclick="callFriends()"
+          >
+            🐟 友達を呼ぶ
+          </button>
+
+        `;
+
+      }
+
+
+
+      /* ======================
+         交流
+      ====================== */
 
       else if (tab === "touch") {
 
-  panel.innerHTML = `
+        panel.innerHTML = `
 
-    <p class="panel-title">
-      中福と交流する 🐡
-    </p>
+          <p class="panel-title">
+            中福と交流する 🐡
+          </p>
 
-    <button onclick="petChufuku()">
-      🫳 なでる
-    </button>
+          <button
+            onclick="petChufuku()"
+          >
+            🫳 なでる
+          </button>
 
-    <button onclick="bePetted()">
-      🥰 なでられる
-    </button>
+          <button
+            onclick="bePetted()"
+          >
+            🥰 なでられる
+          </button>
 
-    <button onclick="playTogether()">
-      🎮 遊んでもらう
-    </button>
+          <button
+            onclick="playTogether()"
+          >
+            🎮 遊んでもらう
+          </button>
 
-  `;
+        `;
 
-}
+      }
 
 
-      /* お出かけ */
+
+      /* ======================
+         お出かけ
+      ====================== */
 
       else if (tab === "out") {
 
@@ -642,11 +1021,15 @@
             中福とお出かけする
           </p>
 
-          <button onclick="goSea()">
+          <button
+            onclick="goSea()"
+          >
             🌊 海に行く
           </button>
 
-          <button onclick="goLand()">
+          <button
+            onclick="goLand()"
+          >
             🏠 お部屋に帰る
           </button>
 
@@ -665,10 +1048,28 @@
     function touchChufuku() {
 
       const chufuku =
-        document.getElementById("chufuku");
+        document.getElementById(
+          "chufuku"
+        );
 
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
+
+
+      clearTimeout(
+        reactionTimer
+      );
+
+
+      chufuku.classList.remove(
+        "playing"
+      );
+
+      chufuku.classList.remove(
+        "happy"
+      );
 
 
       const reactions = [
@@ -677,11 +1078,11 @@
 
         "呼んだ？",
 
-        "我唯足知",
+        "えへへ",
 
         "どうしたの？",
 
-        "なにしてんの？"
+        "いっしょにいる？"
 
       ];
 
@@ -689,14 +1090,18 @@
       const random =
         reactions[
           Math.floor(
-            Math.random() * reactions.length
+            Math.random() *
+            reactions.length
           )
         ];
 
 
-      message.textContent = random;
+      message.textContent =
+        random;
 
-      message.style.display = "block";
+
+      message.style.display =
+        "block";
 
 
       chufuku.src =
@@ -706,19 +1111,19 @@
       addFriendship(1);
 
 
-      clearTimeout(reactionTimer);
-
-
       reactionTimer =
-        setTimeout(function() {
+        setTimeout(
+          function() {
 
-          chufuku.src =
-            "character/normal.png";
+            chufuku.src =
+              "character/normal.png";
 
-          message.style.display =
-            "none";
+            message.style.display =
+              "none";
 
-        }, 2000);
+          },
+          2000
+        );
 
     }
 
@@ -730,126 +1135,205 @@
 
     function petChufuku() {
 
-  const chufuku =
-    document.getElementById("chufuku");
+      const chufuku =
+        document.getElementById(
+          "chufuku"
+        );
 
-  const message =
-    document.getElementById("message");
-
-
-  chufuku.src =
-    "character/heart.png";
-
-
-  message.textContent =
-    "うむ。悪くないね。";
-
-  message.style.display =
-    "block";
+      const message =
+        document.getElementById(
+          "message"
+        );
 
 
-  addFriendship(1);
+      clearTimeout(
+        reactionTimer
+      );
 
 
-  clearTimeout(reactionTimer);
+      chufuku.classList.remove(
+        "playing"
+      );
 
-
-  reactionTimer =
-    setTimeout(function() {
 
       chufuku.src =
-        "character/normal.png";
+        "character/happy.png";
+
+
+      message.textContent =
+        "なでなで気持ちいい〜";
+
 
       message.style.display =
-        "none";
+        "block";
 
-    }, 2500);
 
-}
+      addFriendship(1);
+
+
+      reactionTimer =
+        setTimeout(
+          function() {
+
+            chufuku.src =
+              "character/normal.png";
+
+            message.style.display =
+              "none";
+
+          },
+          2500
+        );
+
+    }
+
+
+
+    /* ==========================
+       なでられる
+    ========================== */
 
     function bePetted() {
 
-  const chufuku =
-    document.getElementById("chufuku");
+      const chufuku =
+        document.getElementById(
+          "chufuku"
+        );
 
-  const message =
-    document.getElementById("message");
-
-
-  chufuku.src =
-    "character/tsurime.png";
-
-
-  message.textContent =
-    "うむ。";
-
-  message.style.display =
-    "block";
+      const message =
+        document.getElementById(
+          "message"
+        );
 
 
-  addFriendship(2);
+      clearTimeout(
+        reactionTimer
+      );
 
 
-  clearTimeout(reactionTimer);
+      chufuku.classList.remove(
+        "playing"
+      );
 
-
-  reactionTimer =
-    setTimeout(function() {
 
       chufuku.src =
-        "character/normal.png";
+        "character/heart.png";
+
+
+      message.textContent =
+        "よしよし〜";
+
 
       message.style.display =
-        "none";
+        "block";
 
-    }, 2500);
 
-}
+      addFriendship(2);
+
+
+      reactionTimer =
+        setTimeout(
+          function() {
+
+            chufuku.src =
+              "character/normal.png";
+
+            message.style.display =
+              "none";
+
+          },
+          2500
+        );
+
+    }
+
+
+
+    /* ==========================
+       遊んでもらう
+    ========================== */
 
     function playTogether() {
 
-  const chufuku =
-    document.getElementById("chufuku");
+      const chufuku =
+        document.getElementById(
+          "chufuku"
+        );
 
-  const message =
-    document.getElementById("message");
-
-
-  chufuku.src =
-    "character/music.png";
-
-
-  message.textContent =
-    "あそんであげる!";
-
-  message.style.display =
-    "block";
+      const message =
+        document.getElementById(
+          "message"
+        );
 
 
-  chufuku.classList.add("happy");
+      clearTimeout(
+        reactionTimer
+      );
 
 
-  addFriendship(2);
+      chufuku.classList.remove(
+        "happy"
+      );
 
+      chufuku.classList.remove(
+        "swimming"
+      );
 
-  clearTimeout(reactionTimer);
-
-
-  reactionTimer =
-    setTimeout(function() {
-
-      chufuku.classList.remove("happy");
 
       chufuku.src =
-        "character/normal.png";
+        "character/move.png";
+
+
+      message.textContent =
+        "わーい！あそぼー！";
+
 
       message.style.display =
-        "none";
+        "block";
 
-    }, 3000);
 
-}
-    
+      chufuku.classList.add(
+        "playing"
+      );
+
+
+      addFriendship(2);
+
+
+      reactionTimer =
+        setTimeout(
+          function() {
+
+            chufuku.classList.remove(
+              "playing"
+            );
+
+
+            chufuku.src =
+              "character/normal.png";
+
+
+            message.textContent =
+              "たのしかった〜!";
+
+
+            setTimeout(
+              function() {
+
+                message.style.display =
+                  "none";
+
+              },
+              1200
+            );
+
+          },
+          3000
+        );
+
+    }
+
+
 
     /* ==========================
        おやつ
@@ -858,19 +1342,33 @@
     function giveSnack(type) {
 
       const chufuku =
-        document.getElementById("chufuku");
+        document.getElementById(
+          "chufuku"
+        );
 
       const snack =
-        document.getElementById("snack");
+        document.getElementById(
+          "snack"
+        );
 
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
 
 
-      clearTimeout(reactionTimer);
+      clearTimeout(
+        reactionTimer
+      );
 
 
-      chufuku.classList.remove("happy");
+      chufuku.classList.remove(
+        "happy"
+      );
+
+      chufuku.classList.remove(
+        "playing"
+      );
 
 
       snack.style.display =
@@ -882,12 +1380,15 @@
 
 
 
-      /* 魚 */
+      /* ======================
+         魚
+      ====================== */
 
       if (type === "fish") {
 
         snack.src =
           "item/fish.PNG";
+
 
         snack.style.display =
           "block";
@@ -900,44 +1401,53 @@
         message.textContent =
           "わーい!";
 
+
         message.style.display =
           "block";
 
 
-        chufuku.classList.add("happy");
+        chufuku.classList.add(
+          "happy"
+        );
 
 
         addFriendship(3);
 
 
         reactionTimer =
-          setTimeout(function() {
+          setTimeout(
+            function() {
 
-            chufuku.classList.remove(
-              "happy"
-            );
-
-
-            chufuku.src =
-              "character/heart.png";
+              chufuku.classList.remove(
+                "happy"
+              );
 
 
-            message.textContent =
-              "すごくおいしいー!";
+              chufuku.src =
+                "character/heart.png";
 
 
-          }, 2000);
+              message.textContent =
+                "すごくおいしいー!";
+
+
+            },
+            2000
+          );
 
       }
 
 
 
-      /* ポテチ */
+      /* ======================
+         ポテチ
+      ====================== */
 
       else if (type === "potato") {
 
         snack.src =
           "item/potetocrisps.PNG";
+
 
         snack.style.display =
           "block";
@@ -950,54 +1460,66 @@
         message.textContent =
           "わーい!!";
 
+
         message.style.display =
           "block";
 
 
-        chufuku.classList.add("happy");
+        chufuku.classList.add(
+          "happy"
+        );
 
 
         addFriendship(2);
 
 
         reactionTimer =
-          setTimeout(function() {
+          setTimeout(
+            function() {
 
-            chufuku.classList.remove(
-              "happy"
-            );
-
-
-            chufuku.src =
-              "character/tsurime.png";
+              chufuku.classList.remove(
+                "happy"
+              );
 
 
-            reactionTimer =
-              setTimeout(function() {
-
-                chufuku.src =
-                  "character/tears.png";
+              chufuku.src =
+                "character/tsurime.png";
 
 
-                message.textContent =
-                  "おなかわるい";
+              reactionTimer =
+                setTimeout(
+                  function() {
+
+                    chufuku.src =
+                      "character/tears.png";
 
 
-              }, 1200);
+                    message.textContent =
+                      "おなかわるい";
 
 
-          }, 2000);
+                  },
+                  1200
+                );
+
+
+            },
+            2000
+          );
 
       }
 
 
 
-      /* りんご */
+      /* ======================
+         りんご
+      ====================== */
 
       else if (type === "apple") {
 
         snack.src =
           "item/apple.png";
+
 
         snack.style.display =
           "block";
@@ -1015,31 +1537,134 @@
           "block";
 
 
-        chufuku.classList.add("happy");
+        chufuku.classList.add(
+          "happy"
+        );
 
 
         addFriendship(1);
 
 
         reactionTimer =
-          setTimeout(function() {
+          setTimeout(
+            function() {
 
-            chufuku.classList.remove(
-              "happy"
-            );
-
-
-            chufuku.src =
-              "character/normal.png";
+              chufuku.classList.remove(
+                "happy"
+              );
 
 
-            snack.style.display =
-              "none";
+              chufuku.src =
+                "character/normal.png";
 
 
-          }, 3000);
+              snack.style.display =
+                "none";
+
+
+              message.style.display =
+                "none";
+
+
+            },
+            3000
+          );
 
       }
+
+    }
+
+
+
+    /* ==========================
+       友達を呼ぶ
+    ========================== */
+
+    function callFriends() {
+
+      const friends =
+        document.getElementById(
+          "friends"
+        );
+
+      const message =
+        document.getElementById(
+          "message"
+        );
+
+
+      /* 以前の友達を消す */
+
+      friends.innerHTML =
+        "";
+
+
+      /* 中福にお知らせ */
+
+      message.textContent =
+        "友達を呼んでみよう！";
+
+
+      message.style.display =
+        "block";
+
+
+      /* 5匹の魚を作る */
+
+      for (
+        let i = 1;
+        i <= 5;
+        i++
+      ) {
+
+        const fish =
+          document.createElement(
+            "img"
+          );
+
+
+        fish.src =
+          "item/fish.PNG";
+
+
+        fish.alt =
+          "友達の魚";
+
+
+        fish.className =
+          "friend-fish fish" + i;
+
+
+        friends.appendChild(
+          fish
+        );
+
+      }
+
+
+      addFriendship(2);
+
+
+      setTimeout(
+        function() {
+
+          message.textContent =
+            "みんな来てくれた！";
+
+        },
+        2500
+      );
+
+
+      setTimeout(
+        function() {
+
+          message.style.display =
+            "none";
+
+        },
+        5000
+      );
 
     }
 
@@ -1052,17 +1677,28 @@
     function goSea() {
 
       const room =
-        document.getElementById("room");
+        document.getElementById(
+          "room"
+        );
 
       const chufuku =
-        document.getElementById("chufuku");
+        document.getElementById(
+          "chufuku"
+        );
 
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
 
 
       room.style.backgroundImage =
         'url("background/sea1.jpg")';
+
+
+      chufuku.classList.remove(
+        "playing"
+      );
 
 
       chufuku.classList.add(
@@ -1078,12 +1714,15 @@
         "block";
 
 
-      setTimeout(function() {
+      setTimeout(
+        function() {
 
-        message.style.display =
-          "none";
+          message.style.display =
+            "none";
 
-      }, 2000);
+        },
+        2000
+      );
 
     }
 
@@ -1096,13 +1735,19 @@
     function goLand() {
 
       const room =
-        document.getElementById("room");
+        document.getElementById(
+          "room"
+        );
 
       const chufuku =
-        document.getElementById("chufuku");
+        document.getElementById(
+          "chufuku"
+        );
 
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
 
 
       room.style.backgroundImage =
@@ -1111,6 +1756,10 @@
 
       chufuku.classList.remove(
         "swimming"
+      );
+
+      chufuku.classList.remove(
+        "playing"
       );
 
 
@@ -1122,29 +1771,26 @@
         "block";
 
 
-      setTimeout(function() {
+      setTimeout(
+        function() {
 
-        message.style.display =
-          "none";
+          message.style.display =
+            "none";
 
-      }, 2000);
+        },
+        2000
+      );
 
     }
 
 
 
     /* ==========================
-       最初に「お部屋」タブを表示
+       最初のタブ
     ========================== */
 
     openTab("home");
 
-
-  </script>
-
-
-</body>
-</html>
 
   </script>
 
