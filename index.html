@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -192,93 +193,69 @@
     }
 
 
-    /*
-       ゆっくり大きく動く
-    */
-
     @keyframes playMove {
 
       0% {
-
         left: 50%;
         bottom: 8%;
 
         transform:
           translateX(-50%)
           rotate(0deg);
-
       }
 
-
       15% {
-
         left: 20%;
         bottom: 20%;
 
         transform:
           translateX(-50%)
           rotate(-6deg);
-
       }
 
-
       32% {
-
         left: 75%;
         bottom: 32%;
 
         transform:
           translateX(-50%)
           rotate(5deg);
-
       }
 
-
       50% {
-
         left: 85%;
         bottom: 8%;
 
         transform:
           translateX(-50%)
           rotate(7deg);
-
       }
 
-
       68% {
-
         left: 25%;
         bottom: 38%;
 
         transform:
           translateX(-50%)
           rotate(-5deg);
-
       }
 
-
       84% {
-
         left: 65%;
         bottom: 48%;
 
         transform:
           translateX(-50%)
           rotate(4deg);
-
       }
 
-
       100% {
-
         left: 50%;
         bottom: 8%;
 
         transform:
           translateX(-50%)
           rotate(0deg);
-
       }
 
     }
@@ -322,86 +299,66 @@
     @keyframes applePlay {
 
       0% {
-
         left: 45%;
         bottom: 28%;
 
         transform:
           translateX(-50%)
           rotate(0deg);
-
       }
 
-
       15% {
-
         left: 30%;
         bottom: 40%;
 
         transform:
           translateX(-50%)
           rotate(90deg);
-
       }
 
-
       32% {
-
         left: 70%;
         bottom: 48%;
 
         transform:
           translateX(-50%)
           rotate(180deg);
-
       }
 
-
       50% {
-
         left: 82%;
         bottom: 22%;
 
         transform:
           translateX(-50%)
           rotate(270deg);
-
       }
 
-
       68% {
-
         left: 30%;
         bottom: 52%;
 
         transform:
           translateX(-50%)
           rotate(360deg);
-
       }
 
-
       84% {
-
         left: 60%;
         bottom: 55%;
 
         transform:
           translateX(-50%)
           rotate(450deg);
-
       }
 
-
       100% {
-
         left: 50%;
         bottom: 25%;
 
         transform:
           translateX(-50%)
           rotate(540deg);
-
       }
 
     }
@@ -488,11 +445,6 @@
 
     }
 
-
-    /*
-       右 → 左
-       そのまま画面外へ
-    */
 
     .friend-fish.fish1 {
       animation:
@@ -831,17 +783,11 @@
 <body>
 
 
-  <!-- ==========================
-       中福の部屋
-  ========================== -->
-
   <div
     class="room"
     id="room"
   >
 
-
-    <!-- 中福 -->
 
     <img
       src="character/normal.png"
@@ -852,8 +798,6 @@
     >
 
 
-    <!-- おやつ -->
-
     <img
       src=""
       alt="おやつ"
@@ -861,8 +805,6 @@
       id="snack"
     >
 
-
-    <!-- 遊ぶときのりんご -->
 
     <img
       src="item/apple.png"
@@ -872,12 +814,8 @@
     >
 
 
-    <!-- 友達 -->
-
     <div id="friends"></div>
 
-
-    <!-- セリフ -->
 
     <div
       class="message"
@@ -889,10 +827,6 @@
 
 
 
-  <!-- ==========================
-       ステータス
-  ========================== -->
-
   <div class="status">
 
     ❤️ なかよし度：
@@ -901,10 +835,6 @@
   </div>
 
 
-
-  <!-- ==========================
-       タブ
-  ========================== -->
 
   <div class="tabs">
 
@@ -978,10 +908,6 @@
 
 
 
-  <!-- ==========================
-       タブの中身
-  ========================== -->
-
   <div
     class="panel"
     id="panel"
@@ -1047,6 +973,65 @@
 
 
     /* ==========================
+       音
+    ========================== */
+
+    const sounds = {
+
+      apple:
+        new Audio("sounds/poi.mp3"),
+
+      sea:
+        new Audio("sounds/bubles.mp3"),
+
+      talk:
+        new Audio("sounds/piyopiyo.mp3"),
+
+      play:
+        new Audio("sounds/wave.mp3"),
+
+      fishSwim:
+        new Audio("sounds/wave2.mp3"),
+
+      fishEat:
+        new Audio("sounds/pichan2.mp3"),
+
+      land:
+        new Audio("sounds/pichan.mp3"),
+
+      pet:
+        new Audio("sounds/wipes.mp3")
+
+    };
+
+
+    function playSound(name) {
+
+      const sound =
+        sounds[name];
+
+
+      if (!sound) return;
+
+
+      sound.currentTime = 0;
+
+
+      sound.play().catch(
+        function() {
+
+          console.log(
+            "音を再生できませんでした"
+          );
+
+        }
+      );
+
+    }
+
+
+
+    /* ==========================
        タブ
     ========================== */
 
@@ -1081,8 +1066,6 @@
 
 
 
-      /* お部屋 */
-
       if (tab === "home") {
 
         panel.innerHTML = `
@@ -1102,8 +1085,6 @@
       }
 
 
-
-      /* ごはん */
 
       else if (tab === "food") {
 
@@ -1137,8 +1118,6 @@
 
 
 
-      /* 友達 */
-
       else if (tab === "friends") {
 
         panel.innerHTML = `
@@ -1158,8 +1137,6 @@
       }
 
 
-
-      /* 交流 */
 
       else if (tab === "touch") {
 
@@ -1192,8 +1169,6 @@
       }
 
 
-
-      /* お出かけ */
 
       else if (tab === "out") {
 
@@ -1243,6 +1218,9 @@
       clearTimeout(
         reactionTimer
       );
+
+
+      playSound("talk");
 
 
       chufuku.classList.remove(
@@ -1331,6 +1309,9 @@
       clearTimeout(
         reactionTimer
       );
+
+
+      playSound("pet");
 
 
       chufuku.classList.remove(
@@ -1456,6 +1437,9 @@
       clearTimeout(
         reactionTimer
       );
+
+
+      playSound("play");
 
 
       chufuku.classList.remove(
@@ -1591,6 +1575,9 @@
 
       if (type === "fish") {
 
+        playSound("fishEat");
+
+
         snack.src =
           "item/fish.PNG";
 
@@ -1718,6 +1705,9 @@
 
       else if (type === "apple") {
 
+        playSound("apple");
+
+
         snack.src =
           "item/apple.png";
 
@@ -1794,6 +1784,14 @@
         );
 
 
+      clearTimeout(
+        reactionTimer
+      );
+
+
+      playSound("fishSwim");
+
+
       friends.innerHTML =
         "";
 
@@ -1805,8 +1803,6 @@
       message.style.display =
         "block";
 
-
-      /* 5匹の魚 */
 
       for (
         let i = 1;
@@ -1842,11 +1838,6 @@
       addFriendship(2);
 
 
-      /*
-         少しして
-         中福が気づく
-      */
-
       setTimeout(
         function() {
 
@@ -1857,10 +1848,6 @@
         1800
       );
 
-
-      /*
-         魚が通り過ぎたあと
-      */
 
       setTimeout(
         function() {
@@ -1907,6 +1894,14 @@
         document.getElementById(
           "message"
         );
+
+
+      clearTimeout(
+        reactionTimer
+      );
+
+
+      playSound("sea");
 
 
       room.style.backgroundImage =
@@ -1967,6 +1962,14 @@
         );
 
 
+      clearTimeout(
+        reactionTimer
+      );
+
+
+      playSound("land");
+
+
       room.style.backgroundImage =
         'url("background/room1.jpg")';
 
@@ -2007,6 +2010,13 @@
     ========================== */
 
     openTab("home");
+
+
+  </script>
+
+</body>
+</html>
+```
 
 
   </script>
