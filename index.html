@@ -14,7 +14,12 @@
       margin: 0;
       background: #eee;
       font-family: sans-serif;
+      color: #333;
     }
+
+    /* ==========================
+       中福のいる画面
+    ========================== */
 
     .room {
       position: relative;
@@ -28,7 +33,11 @@
       background-position: center;
     }
 
-    /* 中福 */
+
+    /* ==========================
+       中福
+    ========================== */
+
     .chufuku {
       position: absolute;
       width: 35%;
@@ -36,7 +45,62 @@
       left: 50%;
       bottom: 5%;
       transform: translateX(-50%);
+      cursor: pointer;
+
+      /* 普段のゆらゆら */
+      animation: float 3s ease-in-out infinite;
     }
+
+
+    /* 海で泳いでいる感じ */
+    .chufuku.swimming {
+      animation: swim 3s ease-in-out infinite;
+    }
+
+
+    /* 普段のぷかぷか */
+    @keyframes float {
+
+      0% {
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(-8px) rotate(-1deg);
+      }
+
+      100% {
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+      }
+
+    }
+
+
+    /* 海で泳ぐ */
+    @keyframes swim {
+
+      0% {
+        transform: translateX(-50%) translateY(0) rotate(-2deg);
+      }
+
+      25% {
+        transform: translateX(-48%) translateY(-12px) rotate(2deg);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(0) rotate(-2deg);
+      }
+
+      75% {
+        transform: translateX(-52%) translateY(10px) rotate(2deg);
+      }
+
+      100% {
+        transform: translateX(-50%) translateY(0) rotate(-2deg);
+      }
+
+    }
+
 
     /* 喜ぶ */
     .chufuku.happy {
@@ -44,6 +108,7 @@
     }
 
     @keyframes happy {
+
       0% {
         transform: translateX(-50%) translateY(0);
       }
@@ -55,160 +120,7 @@
       100% {
         transform: translateX(-50%) translateY(0);
       }
-    }
 
-    /* おやつ */
-    .snack {
-      position: absolute;
-      width: 100px;
-      left: 50%;
-      bottom: 25%;
-      transform: translateX(-50%);
-      display: none;
-    }
-
-    /* セリフ */
-    .message {
-      position: absolute;
-      left: 50%;
-      top: 8%;
-      transform: translateX(-50%);
-      background: white;
-      padding: 15px 25px;
-      border-radius: 20px;
-      font-size: 20px;
-      display: none;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-      white-space: nowrap;
-    }
-
-    /* 情報表示 */
-    .status {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 15px;
-      background: white;
-      text-align: center;
-      font-size: 20px;
-    }
-
-    /* ボタン */
-    .buttons {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-      background: white;
-    }
-
-    .buttons p {
-      margin-top: 0;
-      font-size: 18px;
-    }
-
-    button {
-      border: none;
-      border-radius: 30px;
-      padding: 14px 24px;
-      margin: 5px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- 部屋 -->
-  <div class="room" id="room">
-
-    <!-- 中福 -->
-    <img
-      src="character/normal.png"
-      alt="中福"
-      class="chufuku"
-      id="chufuku"
-    >
-
-    <!-- おやつ -->
-    <img
-      src=""
-      alt="おやつ"
-      class="snack"
-      id="snack"
-    >
-
-    <!-- セリフ -->
-    <div class="message" id="message"></div>
-
-  </div>
-
-
-  <!-- ステータス -->
-  <div class="status">
-    ❤️ なかよし度：<span id="friendship">0</span>
-  </div>
-
-
-  <!-- ボタン -->
-  <div class="buttons">
-
-    <p>中福に何をあげる？</p>
-
-    <button onclick="giveSnack('fish')">
-      🐟 魚
-    </button>
-
-    <button onclick="giveSnack('potato')">
-      🍟 ポテチ
-    </button>
-
-    <button onclick="giveSnack('apple')">
-      🍎 りんご
-    </button>
-
-    <hr>
-
-    <p>中福とお出かけする</p>
-
-    <button onclick="goSea()">
-      🌊 海に連れていく
-    </button>
-
-    <button onclick="goLand()">
-      🏠 陸に連れていく
-    </button>
-
-  </div>
-
-
-  <script>
-
-    /* ==========================
-       なかよし度
-    ========================== */
-
-    let friendship = Number(localStorage.getItem("friendship")) || 0;
-
-    document.getElementById("friendship").textContent = friendship;
-
-
-    function addFriendship(amount) {
-
-      friendship += amount;
-
-      // 0～100の範囲にする
-      if (friendship > 100) {
-        friendship = 100;
-      }
-
-      localStorage.setItem("friendship", friendship);
-
-      document.getElementById("friendship").textContent = friendship;
     }
 
 
@@ -216,117 +128,881 @@
        おやつ
     ========================== */
 
+    .snack {
+      position: absolute;
+      width: 100px;
+      left: 50%;
+      bottom: 28%;
+      transform: translateX(-50%);
+      display: none;
+      pointer-events: none;
+    }
+
+
+    /* ==========================
+       セリフ
+    ========================== */
+
+    .message {
+      position: absolute;
+      left: 50%;
+      top: 7%;
+      transform: translateX(-50%);
+
+      background: white;
+      padding: 15px 25px;
+      border-radius: 20px;
+
+      font-size: 20px;
+
+      display: none;
+
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+
+      white-space: nowrap;
+
+      z-index: 10;
+    }
+
+
+    /* ==========================
+       ステータス
+    ========================== */
+
+    .status {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px;
+      background: white;
+      text-align: center;
+      font-size: 20px;
+    }
+
+
+    /* ==========================
+       タブ
+    ========================== */
+
+    .tabs {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      display: flex;
+
+      background: white;
+
+      border-top: 1px solid #ddd;
+    }
+
+
+    .tab {
+      flex: 1;
+
+      border: none;
+      border-radius: 0;
+
+      background: white;
+
+      padding: 14px 5px;
+
+      margin: 0;
+
+      font-size: 16px;
+
+      cursor: pointer;
+    }
+
+
+    .tab.active {
+      background: #f1f1f1;
+      font-weight: bold;
+    }
+
+
+    /* ==========================
+       タブの中身
+    ========================== */
+
+    .panel {
+
+      max-width: 1200px;
+
+      margin: 0 auto;
+
+      background: white;
+
+      padding: 15px;
+
+      text-align: center;
+
+      min-height: 100px;
+    }
+
+
+    .panel-title {
+      margin-top: 0;
+      font-size: 17px;
+    }
+
+
+    .panel button {
+
+      border: none;
+
+      border-radius: 25px;
+
+      padding: 12px 20px;
+
+      margin: 5px;
+
+      font-size: 17px;
+
+      cursor: pointer;
+
+      background: #f2f2f2;
+    }
+
+
+    .panel button:hover {
+      opacity: 0.75;
+    }
+
+
+    /* ==========================
+       スマホ用
+    ========================== */
+
+    @media (max-width: 600px) {
+
+      .room {
+        aspect-ratio: 4 / 5;
+      }
+
+
+      .chufuku {
+
+        width: 62%;
+
+        bottom: 8%;
+
+      }
+
+
+      /* セリフを上の方へ */
+
+      .message {
+
+        top: 4%;
+
+        font-size: 16px;
+
+        padding: 10px 16px;
+
+        max-width: 85%;
+
+        white-space: normal;
+
+        text-align: center;
+
+      }
+
+
+      /* 食べ物を中福の横へ */
+
+      .snack {
+
+        width: 70px;
+
+        left: 22%;
+
+        bottom: 30%;
+
+      }
+
+
+      .status {
+
+        font-size: 17px;
+
+        padding: 10px;
+
+      }
+
+
+      .tab {
+
+        font-size: 14px;
+
+        padding: 12px 3px;
+
+      }
+
+
+      .panel {
+
+        padding: 10px;
+
+      }
+
+
+      .panel button {
+
+        font-size: 15px;
+
+        padding: 10px 15px;
+
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- ==========================
+       中福の部屋
+  ========================== -->
+
+  <div class="room" id="room">
+
+
+    <!-- 中福 -->
+
+    <img
+      src="character/normal.png"
+      alt="中福"
+      class="chufuku"
+      id="chufuku"
+      onclick="touchChufuku()"
+    >
+
+
+    <!-- おやつ -->
+
+    <img
+      src=""
+      alt="おやつ"
+      class="snack"
+      id="snack"
+    >
+
+
+    <!-- セリフ -->
+
+    <div
+      class="message"
+      id="message">
+    </div>
+
+
+  </div>
+
+
+  <!-- ==========================
+       ステータス
+  ========================== -->
+
+  <div class="status">
+
+    ❤️ なかよし度：
+    <span id="friendship">0</span>
+
+  </div>
+
+
+  <!-- ==========================
+       タブ
+  ========================== -->
+
+  <div class="tabs">
+
+
+    <button
+      class="tab active"
+      id="tab-home"
+      onclick="openTab('home')">
+
+      🏠
+      <br>
+      お部屋
+
+    </button>
+
+
+    <button
+      class="tab"
+      id="tab-food"
+      onclick="openTab('food')">
+
+      🍚
+      <br>
+      ごはん
+
+    </button>
+
+
+    <button
+      class="tab"
+      id="tab-touch"
+      onclick="openTab('touch')">
+
+      💕
+      <br>
+      ふれあい
+
+    </button>
+
+
+    <button
+      class="tab"
+      id="tab-out"
+      onclick="openTab('out')">
+
+      🌊
+      <br>
+      お出かけ
+
+    </button>
+
+
+  </div>
+
+
+  <!-- ==========================
+       タブの中身
+  ========================== -->
+
+  <div
+    class="panel"
+    id="panel">
+
+  </div>
+
+
+  <script>
+
+
+    /* ==========================
+       なかよし度
+    ========================== */
+
+    let friendship =
+      Number(localStorage.getItem("friendship")) || 0;
+
+
+    document.getElementById("friendship").textContent =
+      friendship;
+
+
+    function addFriendship(amount) {
+
+      friendship += amount;
+
+
+      if (friendship > 100) {
+        friendship = 100;
+      }
+
+
+      localStorage.setItem(
+        "friendship",
+        friendship
+      );
+
+
+      document.getElementById("friendship").textContent =
+        friendship;
+
+    }
+
+
+
+    /* ==========================
+       タイマー
+    ========================== */
+
     let reactionTimer;
 
 
-    function giveSnack(type) {
 
-      const chufuku = document.getElementById("chufuku");
-      const snack = document.getElementById("snack");
-      const message = document.getElementById("message");
+    /* ==========================
+       タブ
+    ========================== */
+
+    function openTab(tab) {
+
+      const panel =
+        document.getElementById("panel");
+
+
+      /* 全タブをリセット */
+
+      document.querySelectorAll(".tab").forEach(
+        function(button) {
+
+          button.classList.remove("active");
+
+        }
+      );
+
+
+      /* 選択されたタブ */
+
+      document
+        .getElementById("tab-" + tab)
+        .classList.add("active");
+
+
+
+      /* お部屋 */
+
+      if (tab === "home") {
+
+        panel.innerHTML = `
+
+          <p class="panel-title">
+            中福のお部屋
+          </p>
+
+          <button onclick="touchChufuku()">
+            🦭 中福に話しかける
+          </button>
+
+        `;
+
+      }
+
+
+
+      /* ごはん */
+
+      else if (tab === "food") {
+
+        panel.innerHTML = `
+
+          <p class="panel-title">
+            中福に何をあげる？
+          </p>
+
+          <button onclick="giveSnack('fish')">
+            🐟 魚
+          </button>
+
+          <button onclick="giveSnack('potato')">
+            🍟 ポテチ
+          </button>
+
+          <button onclick="giveSnack('apple')">
+            🍎 りんご
+          </button>
+
+        `;
+
+      }
+
+
+
+      /* ふれあい */
+
+      else if (tab === "touch") {
+
+        panel.innerHTML = `
+
+          <p class="panel-title">
+            中福とふれあう
+          </p>
+
+          <button onclick="petChufuku()">
+            🫳 なでる
+          </button>
+
+          <button onclick="hugChufuku()">
+            💕 触れ合う
+          </button>
+
+        `;
+
+      }
+
+
+
+      /* お出かけ */
+
+      else if (tab === "out") {
+
+        panel.innerHTML = `
+
+          <p class="panel-title">
+            中福とお出かけする
+          </p>
+
+          <button onclick="goSea()">
+            🌊 海に行く
+          </button>
+
+          <button onclick="goLand()">
+            🏠 お部屋に帰る
+          </button>
+
+        `;
+
+      }
+
+    }
+
+
+
+    /* ==========================
+       中福をタップ
+    ========================== */
+
+    function touchChufuku() {
+
+      const chufuku =
+        document.getElementById("chufuku");
+
+      const message =
+        document.getElementById("message");
+
+
+      const reactions = [
+
+        "なあに？",
+
+        "呼んだ？",
+
+        "えへへ",
+
+        "どうしたの？",
+
+        "いっしょにいる？"
+
+      ];
+
+
+      const random =
+        reactions[
+          Math.floor(
+            Math.random() * reactions.length
+          )
+        ];
+
+
+      message.textContent = random;
+
+      message.style.display = "block";
+
+
+      chufuku.src =
+        "character/happy.png";
+
+
+      addFriendship(1);
+
 
       clearTimeout(reactionTimer);
 
+
+      reactionTimer =
+        setTimeout(function() {
+
+          chufuku.src =
+            "character/normal.png";
+
+          message.style.display =
+            "none";
+
+        }, 2000);
+
+    }
+
+
+
+    /* ==========================
+       なでる
+    ========================== */
+
+    function petChufuku() {
+
+      const chufuku =
+        document.getElementById("chufuku");
+
+      const message =
+        document.getElementById("message");
+
+
+      chufuku.src =
+        "character/happy.png";
+
+
+      message.textContent =
+        "なでなで気持ちいい〜";
+
+      message.style.display =
+        "block";
+
+
+      addFriendship(1);
+
+
+      clearTimeout(reactionTimer);
+
+
+      reactionTimer =
+        setTimeout(function() {
+
+          chufuku.src =
+            "character/normal.png";
+
+          message.style.display =
+            "none";
+
+        }, 2500);
+
+    }
+
+
+
+    /* ==========================
+       触れ合う
+    ========================== */
+
+    function hugChufuku() {
+
+      const chufuku =
+        document.getElementById("chufuku");
+
+      const message =
+        document.getElementById("message");
+
+
+      chufuku.src =
+        "character/heart.png";
+
+
+      message.textContent =
+        "いっしょにいるの、うれしいな";
+
+      message.style.display =
+        "block";
+
+
+      addFriendship(2);
+
+
+      clearTimeout(reactionTimer);
+
+
+      reactionTimer =
+        setTimeout(function() {
+
+          chufuku.src =
+            "character/normal.png";
+
+          message.style.display =
+            "none";
+
+        }, 3000);
+
+    }
+
+
+
+    /* ==========================
+       おやつ
+    ========================== */
+
+    function giveSnack(type) {
+
+      const chufuku =
+        document.getElementById("chufuku");
+
+      const snack =
+        document.getElementById("snack");
+
+      const message =
+        document.getElementById("message");
+
+
+      clearTimeout(reactionTimer);
+
+
       chufuku.classList.remove("happy");
 
-      snack.style.display = "none";
-      message.style.display = "none";
+
+      snack.style.display =
+        "none";
+
+
+      message.style.display =
+        "none";
+
 
 
       /* 魚 */
 
       if (type === "fish") {
 
-        snack.src = "item/fish.PNG";
-        snack.style.display = "block";
+        snack.src =
+          "item/fish.PNG";
 
-        chufuku.src = "character/music.png";
+        snack.style.display =
+          "block";
 
-        message.textContent = "わーい!";
-        message.style.display = "block";
+
+        chufuku.src =
+          "character/music.png";
+
+
+        message.textContent =
+          "わーい!";
+
+        message.style.display =
+          "block";
+
 
         chufuku.classList.add("happy");
+
 
         addFriendship(3);
 
 
-        reactionTimer = setTimeout(function() {
+        reactionTimer =
+          setTimeout(function() {
 
-          chufuku.classList.remove("happy");
+            chufuku.classList.remove(
+              "happy"
+            );
 
-          chufuku.src = "character/heart.png";
 
-          message.textContent = "すごくおいしいー!";
+            chufuku.src =
+              "character/heart.png";
 
-        }, 2000);
+
+            message.textContent =
+              "すごくおいしいー!";
+
+
+          }, 2000);
+
       }
+
 
 
       /* ポテチ */
 
       else if (type === "potato") {
 
-        snack.src = "item/potetocrisps.PNG";
-        snack.style.display = "block";
+        snack.src =
+          "item/potetocrisps.PNG";
 
-        chufuku.src = "character/music.png";
+        snack.style.display =
+          "block";
 
-        message.textContent = "わーい!!";
-        message.style.display = "block";
+
+        chufuku.src =
+          "character/music.png";
+
+
+        message.textContent =
+          "わーい!!";
+
+        message.style.display =
+          "block";
+
 
         chufuku.classList.add("happy");
+
 
         addFriendship(2);
 
 
-        reactionTimer = setTimeout(function() {
+        reactionTimer =
+          setTimeout(function() {
 
-          chufuku.classList.remove("happy");
+            chufuku.classList.remove(
+              "happy"
+            );
 
-          chufuku.src = "character/tsurime.png";
+
+            chufuku.src =
+              "character/tsurime.png";
 
 
-          reactionTimer = setTimeout(function() {
+            reactionTimer =
+              setTimeout(function() {
 
-            chufuku.src = "character/tears.png";
+                chufuku.src =
+                  "character/tears.png";
 
-            message.textContent = "おなかわるい";
 
-          }, 1200);
+                message.textContent =
+                  "おなかわるい";
 
-        }, 2000);
+
+              }, 1200);
+
+
+          }, 2000);
+
       }
+
 
 
       /* りんご */
 
       else if (type === "apple") {
 
-        snack.src = "item/apple.png";
-        snack.style.display = "block";
+        snack.src =
+          "item/apple.png";
 
-        chufuku.src = "character/music.png";
+        snack.style.display =
+          "block";
 
-        message.textContent = "わーい!ありがとう!";
-        message.style.display = "block";
+
+        chufuku.src =
+          "character/music.png";
+
+
+        message.textContent =
+          "わーい!ありがとう!";
+
+
+        message.style.display =
+          "block";
+
 
         chufuku.classList.add("happy");
+
 
         addFriendship(1);
 
 
-        reactionTimer = setTimeout(function() {
+        reactionTimer =
+          setTimeout(function() {
 
-          chufuku.classList.remove("happy");
+            chufuku.classList.remove(
+              "happy"
+            );
 
-          chufuku.src = "character/normal.png";
 
-          snack.style.display = "none";
+            chufuku.src =
+              "character/normal.png";
 
-        }, 3000);
+
+            snack.style.display =
+              "none";
+
+
+          }, 3000);
+
       }
 
     }
+
 
 
     /* ==========================
@@ -335,19 +1011,42 @@
 
     function goSea() {
 
-      const room = document.getElementById("room");
+      const room =
+        document.getElementById("room");
 
-      room.style.backgroundImage = 'url("background/sea1.jpg")';
+      const chufuku =
+        document.getElementById("chufuku");
 
-      const message = document.getElementById("message");
+      const message =
+        document.getElementById("message");
 
-      message.textContent = "海に来たよ!";
-      message.style.display = "block";
+
+      room.style.backgroundImage =
+        'url("background/sea1.jpg")';
+
+
+      chufuku.classList.add(
+        "swimming"
+      );
+
+
+      message.textContent =
+        "海に来たよ!";
+
+
+      message.style.display =
+        "block";
+
 
       setTimeout(function() {
-        message.style.display = "none";
+
+        message.style.display =
+          "none";
+
       }, 2000);
+
     }
+
 
 
     /* ==========================
@@ -356,19 +1055,56 @@
 
     function goLand() {
 
-      const room = document.getElementById("room");
+      const room =
+        document.getElementById("room");
 
-      room.style.backgroundImage = 'url("background/room1.jpg")';
+      const chufuku =
+        document.getElementById("chufuku");
 
-      const message = document.getElementById("message");
+      const message =
+        document.getElementById("message");
 
-      message.textContent = "お部屋に帰ってきたよ!";
-      message.style.display = "block";
+
+      room.style.backgroundImage =
+        'url("background/room1.jpg")';
+
+
+      chufuku.classList.remove(
+        "swimming"
+      );
+
+
+      message.textContent =
+        "お部屋に帰ってきたよ!";
+
+
+      message.style.display =
+        "block";
+
 
       setTimeout(function() {
-        message.style.display = "none";
+
+        message.style.display =
+          "none";
+
       }, 2000);
+
     }
+
+
+
+    /* ==========================
+       最初に「お部屋」タブを表示
+    ========================== */
+
+    openTab("home");
+
+
+  </script>
+
+
+</body>
+</html>
 
   </script>
 
