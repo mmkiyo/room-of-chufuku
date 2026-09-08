@@ -6,6 +6,7 @@
   <title>中福の部屋</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -16,6 +17,7 @@
       font-family: sans-serif;
       color: #333;
     }
+
 
     /* ==========================
        中福のいる画面
@@ -29,7 +31,9 @@
       aspect-ratio: 16 / 9;
       overflow: hidden;
 
-      background-image: url("background/room1.jpg");
+      background-image:
+        url("background/room1.jpg");
+
       background-size: cover;
       background-position: center;
     }
@@ -40,6 +44,7 @@
     ========================== */
 
     .chufuku {
+
       position: absolute;
 
       width: 35%;
@@ -48,14 +53,15 @@
       left: 50%;
       bottom: 5%;
 
-      transform: translateX(-50%);
+      transform:
+        translateX(-50%);
 
       cursor: pointer;
 
       z-index: 4;
 
-      /* 普段のゆらゆら */
-      animation: float 3s ease-in-out infinite;
+      animation:
+        float 3s ease-in-out infinite;
     }
 
 
@@ -175,57 +181,227 @@
 
 
     /* ==========================
-       遊び回る
+       遊んでいる中福
     ========================== */
 
     .chufuku.playing {
 
       animation:
-        playMove 3s ease-in-out;
+        playMove 7s ease-in-out;
 
     }
 
 
+    /*
+       ゆっくり大きく動く
+    */
+
     @keyframes playMove {
 
       0% {
+
         left: 50%;
         bottom: 8%;
+
         transform:
           translateX(-50%)
           rotate(0deg);
+
       }
 
-      20% {
-        left: 25%;
-        bottom: 18%;
+
+      15% {
+
+        left: 20%;
+        bottom: 20%;
+
         transform:
           translateX(-50%)
-          rotate(-5deg);
+          rotate(-6deg);
+
       }
 
-      45% {
-        left: 70%;
-        bottom: 12%;
+
+      32% {
+
+        left: 75%;
+        bottom: 32%;
+
         transform:
           translateX(-50%)
           rotate(5deg);
+
       }
 
-      70% {
-        left: 35%;
-        bottom: 25%;
+
+      50% {
+
+        left: 85%;
+        bottom: 8%;
+
         transform:
           translateX(-50%)
-          rotate(-4deg);
+          rotate(7deg);
+
       }
 
+
+      68% {
+
+        left: 25%;
+        bottom: 38%;
+
+        transform:
+          translateX(-50%)
+          rotate(-5deg);
+
+      }
+
+
+      84% {
+
+        left: 65%;
+        bottom: 48%;
+
+        transform:
+          translateX(-50%)
+          rotate(4deg);
+
+      }
+
+
       100% {
+
         left: 50%;
         bottom: 8%;
+
         transform:
           translateX(-50%)
           rotate(0deg);
+
+      }
+
+    }
+
+
+    /* ==========================
+       遊んでいるりんご
+    ========================== */
+
+    .play-apple {
+
+      position: absolute;
+
+      width: 70px;
+
+      left: 50%;
+      bottom: 30%;
+
+      transform:
+        translateX(-50%);
+
+      z-index: 6;
+
+      pointer-events: none;
+
+      display: none;
+
+    }
+
+
+    .play-apple.playing {
+
+      display: block;
+
+      animation:
+        applePlay 7s ease-in-out;
+
+    }
+
+
+    @keyframes applePlay {
+
+      0% {
+
+        left: 45%;
+        bottom: 28%;
+
+        transform:
+          translateX(-50%)
+          rotate(0deg);
+
+      }
+
+
+      15% {
+
+        left: 30%;
+        bottom: 40%;
+
+        transform:
+          translateX(-50%)
+          rotate(90deg);
+
+      }
+
+
+      32% {
+
+        left: 70%;
+        bottom: 48%;
+
+        transform:
+          translateX(-50%)
+          rotate(180deg);
+
+      }
+
+
+      50% {
+
+        left: 82%;
+        bottom: 22%;
+
+        transform:
+          translateX(-50%)
+          rotate(270deg);
+
+      }
+
+
+      68% {
+
+        left: 30%;
+        bottom: 52%;
+
+        transform:
+          translateX(-50%)
+          rotate(360deg);
+
+      }
+
+
+      84% {
+
+        left: 60%;
+        bottom: 55%;
+
+        transform:
+          translateX(-50%)
+          rotate(450deg);
+
+      }
+
+
+      100% {
+
+        left: 50%;
+        bottom: 25%;
+
+        transform:
+          translateX(-50%)
+          rotate(540deg);
+
       }
 
     }
@@ -304,7 +480,7 @@
 
       width: 70px;
 
-      left: -100px;
+      right: -100px;
 
       pointer-events: none;
 
@@ -313,102 +489,107 @@
     }
 
 
+    /*
+       右 → 左
+       そのまま画面外へ
+    */
+
     .friend-fish.fish1 {
       animation:
-        fishCome1 5s linear forwards;
+        fishSwim1 6s linear forwards;
     }
 
     .friend-fish.fish2 {
       animation:
-        fishCome2 5.5s linear forwards;
+        fishSwim2 6.5s linear forwards;
     }
 
     .friend-fish.fish3 {
       animation:
-        fishCome3 5.2s linear forwards;
+        fishSwim3 6.2s linear forwards;
     }
 
     .friend-fish.fish4 {
       animation:
-        fishCome4 5.8s linear forwards;
+        fishSwim4 6.8s linear forwards;
     }
 
     .friend-fish.fish5 {
       animation:
-        fishCome5 5.3s linear forwards;
+        fishSwim5 6.3s linear forwards;
     }
 
 
-    @keyframes fishCome1 {
+    @keyframes fishSwim1 {
 
       0% {
-        left: -100px;
+        right: -100px;
         bottom: 30%;
       }
 
       100% {
-        left: 85%;
-        bottom: 42%;
+        right: 110%;
+        bottom: 45%;
       }
 
     }
 
 
-    @keyframes fishCome2 {
+    @keyframes fishSwim2 {
 
       0% {
-        left: -100px;
-        bottom: 42%;
+        right: -100px;
+        bottom: 45%;
       }
 
       100% {
-        left: 75%;
+        right: 110%;
         bottom: 25%;
       }
 
     }
 
 
-    @keyframes fishCome3 {
+    @keyframes fishSwim3 {
 
       0% {
-        left: -100px;
+        right: -100px;
         bottom: 25%;
       }
 
       100% {
-        left: 90%;
-        bottom: 55%;
+        right: 110%;
+        bottom: 58%;
       }
 
     }
 
 
-    @keyframes fishCome4 {
+    @keyframes fishSwim4 {
 
       0% {
-        left: -100px;
+        right: -100px;
         bottom: 55%;
       }
 
       100% {
-        left: 65%;
+        right: 110%;
         bottom: 35%;
       }
 
     }
 
 
-    @keyframes fishCome5 {
+    @keyframes fishSwim5 {
 
       0% {
-        left: -100px;
+        right: -100px;
         bottom: 38%;
       }
 
       100% {
-        left: 80%;
-        bottom: 60%;
+        right: 110%;
+        bottom: 65%;
       }
 
     }
@@ -544,7 +725,7 @@
 
 
     /* ==========================
-       スマホ用
+       スマホ
     ========================== */
 
     @media (max-width: 600px) {
@@ -565,8 +746,6 @@
       }
 
 
-      /* セリフを上へ */
-
       .message {
 
         top: 4%;
@@ -583,8 +762,6 @@
       }
 
 
-      /* おやつを中福の横へ */
-
       .snack {
 
         width: 70px;
@@ -596,7 +773,12 @@
       }
 
 
-      /* 魚の友達 */
+      .play-apple {
+
+        width: 50px;
+
+      }
+
 
       .friend-fish {
 
@@ -616,7 +798,7 @@
 
       .tab {
 
-        font-size: 13px;
+        font-size: 12px;
 
         padding:
           10px 2px;
@@ -677,6 +859,16 @@
       alt="おやつ"
       class="snack"
       id="snack"
+    >
+
+
+    <!-- 遊ぶときのりんご -->
+
+    <img
+      src="item/apple.png"
+      alt="りんご"
+      class="play-apple"
+      id="playApple"
     >
 
 
@@ -806,7 +998,9 @@
 
     let friendship =
       Number(
-        localStorage.getItem("friendship")
+        localStorage.getItem(
+          "friendship"
+        )
       ) || 0;
 
 
@@ -864,8 +1058,6 @@
         );
 
 
-      /* 全タブをリセット */
-
       document
         .querySelectorAll(".tab")
         .forEach(
@@ -879,19 +1071,17 @@
         );
 
 
-      /* 選択されたタブ */
-
       document
         .getElementById(
           "tab-" + tab
         )
-        .classList.add("active");
+        .classList.add(
+          "active"
+        );
 
 
 
-      /* ======================
-         お部屋
-      ====================== */
+      /* お部屋 */
 
       if (tab === "home") {
 
@@ -913,9 +1103,7 @@
 
 
 
-      /* ======================
-         ごはん
-      ====================== */
+      /* ごはん */
 
       else if (tab === "food") {
 
@@ -949,9 +1137,7 @@
 
 
 
-      /* ======================
-         友達
-      ====================== */
+      /* 友達 */
 
       else if (tab === "friends") {
 
@@ -973,9 +1159,7 @@
 
 
 
-      /* ======================
-         交流
-      ====================== */
+      /* 交流 */
 
       else if (tab === "touch") {
 
@@ -1009,9 +1193,7 @@
 
 
 
-      /* ======================
-         お出かけ
-      ====================== */
+      /* お出かけ */
 
       else if (tab === "out") {
 
@@ -1260,6 +1442,11 @@
           "chufuku"
         );
 
+      const apple =
+        document.getElementById(
+          "playApple"
+        );
+
       const message =
         document.getElementById(
           "message"
@@ -1297,6 +1484,11 @@
       );
 
 
+      apple.classList.add(
+        "playing"
+      );
+
+
       addFriendship(2);
 
 
@@ -1305,6 +1497,11 @@
           function() {
 
             chufuku.classList.remove(
+              "playing"
+            );
+
+
+            apple.classList.remove(
               "playing"
             );
 
@@ -1328,7 +1525,7 @@
             );
 
           },
-          3000
+          7000
         );
 
     }
@@ -1356,9 +1553,19 @@
           "message"
         );
 
+      const apple =
+        document.getElementById(
+          "playApple"
+        );
+
 
       clearTimeout(
         reactionTimer
+      );
+
+
+      apple.classList.remove(
+        "playing"
       );
 
 
@@ -1380,9 +1587,7 @@
 
 
 
-      /* ======================
-         魚
-      ====================== */
+      /* 魚 */
 
       if (type === "fish") {
 
@@ -1439,9 +1644,7 @@
 
 
 
-      /* ======================
-         ポテチ
-      ====================== */
+      /* ポテチ */
 
       else if (type === "potato") {
 
@@ -1511,9 +1714,7 @@
 
 
 
-      /* ======================
-         りんご
-      ====================== */
+      /* りんご */
 
       else if (type === "apple") {
 
@@ -1593,13 +1794,9 @@
         );
 
 
-      /* 以前の友達を消す */
-
       friends.innerHTML =
         "";
 
-
-      /* 中福にお知らせ */
 
       message.textContent =
         "友達を呼んでみよう！";
@@ -1609,7 +1806,7 @@
         "block";
 
 
-      /* 5匹の魚を作る */
+      /* 5匹の魚 */
 
       for (
         let i = 1;
@@ -1645,14 +1842,34 @@
       addFriendship(2);
 
 
+      /*
+         少しして
+         中福が気づく
+      */
+
       setTimeout(
         function() {
 
           message.textContent =
-            "みんな来てくれた！";
+            "友達……なのか……？";
 
         },
-        2500
+        1800
+      );
+
+
+      /*
+         魚が通り過ぎたあと
+      */
+
+      setTimeout(
+        function() {
+
+          message.textContent =
+            "……行っちゃった。";
+
+        },
+        4800
       );
 
 
@@ -1663,7 +1880,7 @@
             "none";
 
         },
-        5000
+        6200
       );
 
     }
