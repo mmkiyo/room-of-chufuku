@@ -830,7 +830,7 @@
         /* ★ スマホ版背景 */
 
         background-image:
-          url("background/roomforsmartphone1.jpg");
+          url("background/room3smartphone.jpg");
 
         background-size: cover;
 
@@ -841,7 +841,7 @@
 
       /* --------------------------------
          スマホ版の中福
-         ★ 55% → 65% に拡大
+         ★ 65%
       -------------------------------- */
 
       .chufuku {
@@ -1400,10 +1400,10 @@
       fishEat:
         new Audio("sounds/pichan2.mp3"),
 
-      /* ★ 正しいファイル名 */
+      /* ★ 実際のファイル名：snacks.mp3 */
 
       potato:
-        new Audio("sounds/snacks (1).mp3"),
+        new Audio("sounds/snacks.mp3"),
 
       land:
         new Audio("sounds/pichan.mp3"),
@@ -2236,7 +2236,7 @@
 
       else if (type === "potato") {
 
-        /* ★ snacks (1).mp3 を再生 */
+        /* ★ snacks.mp3 を再生 */
 
         playSound("potato");
 
@@ -2414,8 +2414,11 @@
           );
 
 
+        /* ★ 実際のファイル：
+           character/fishfriend.jpg */
+
         fish.src =
-          "item/fishfriend.jpg";
+          "character/fishfriend.jpg";
 
 
         fish.alt =
@@ -2588,7 +2591,7 @@
       if (window.innerWidth <= 600) {
 
         room.style.backgroundImage =
-          'url("background/roomforsmartphone1.jpg")';
+          'url("background/room3smartphone.jpg")';
 
       }
 
